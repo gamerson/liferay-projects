@@ -13,17 +13,12 @@
  * details.
  */
 --%>
+<%@ include file="/html/init.jsp" %>
 
-<%@page import="java.text.DecimalFormat"%>
-<%@page import="java.text.NumberFormat"%>
-<%@page import="com.liferay.portal.model.User"%>
-<%@page import="com.liferay.projects.quiz.Question"%>
-<%@ include file="/init.jsp" %>
+<%
+Question[] questions = (Question[])portletSession.getAttribute("questions");
 
-<%       
-final Question[] questions = (Question[])session.getAttribute("questions");
-
-final User[] answers = (User[])session.getAttribute("answers");
+User[] answers = (User[])portletSession.getAttribute("answers");
 
 int correctAnswers = 0;
 
@@ -35,8 +30,8 @@ for( int i = 0; i < questions.length; i++)
 	}
 }
 
-final double percent = correctAnswers / (double)questions.length;
-final String score = new DecimalFormat("#%").format(percent);
+double percent = correctAnswers / (double)questions.length;
+String score = new DecimalFormat("#%").format(percent);
 %>
 
 <portlet:renderURL var="startURL">
@@ -53,7 +48,7 @@ final String score = new DecimalFormat("#%").format(percent);
     <aui:input name="percent" label="Score" value="<%=score %>" disabled="true" />
 </aui:fieldset>
 
-<aui:form action="<%= startURL %>" method="get" name="quiz" >
+<aui:form action="<%=startURL %>" method="get" name="quiz" >
 	<aui:button-row>
         <aui:button type="submit" value="Take another quiz" />
     </aui:button-row>
