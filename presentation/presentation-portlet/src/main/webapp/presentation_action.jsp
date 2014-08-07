@@ -15,8 +15,8 @@ JournalArticle article = (JournalArticle)row.getObject();
 
 <liferay-ui:icon-menu>
 <portlet:renderURL var="presentUrl" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
- <portlet:param name="key" value="<%=String.valueOf(article.getPrimaryKey()) %>" />
- <portlet:param name="mvcPath" value="/presentation/present.jsp" />
+    <portlet:param name="key" value="<%=String.valueOf(article.getPrimaryKey()) %>" />
+    <portlet:param name="mvcPath" value="/presentation/present.jsp" />
 </portlet:renderURL>
 
 	<liferay-ui:icon
