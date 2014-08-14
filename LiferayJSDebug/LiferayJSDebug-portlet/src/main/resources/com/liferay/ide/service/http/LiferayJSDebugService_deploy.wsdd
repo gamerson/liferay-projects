@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+	<service name="Plugin_LiferayJSDebug_LiferayJSDebugService" provider="java:RPC" style="rpc" use="encoded">
+		<operation xmlns:operNS="urn:http.service.ide.liferay.com" name="debugJS" qname="operNS:debugJS" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="log" type="tns:string"></parameter>
+		</operation>
+		<parameter name="allowedMethods" value="debugJS" />
+		<parameter name="className" value="com.liferay.ide.service.http.LiferayJSDebugServiceSoap" />
+		<parameter name="typeMappingVersion" value="1.2" />
+		<parameter name="wsdlPortType" value="LiferayJSDebugServiceSoap" />
+		<parameter name="wsdlServiceElement" value="LiferayJSDebugServiceSoapService" />
+		<parameter name="wsdlServicePort" value="Plugin_LiferayJSDebug_LiferayJSDebugService" />
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.ide.liferay.com" />
+	</service>
+</deployment>

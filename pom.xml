@@ -22,5 +22,6 @@
 
   <modules>
     <module>who-is-quiz-portlet</module>
+    <module>LiferayJSDebug</module>
   </modules>
 </project>
