@@ -59,9 +59,59 @@ String ctxPath = request.getContextPath();
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
+		<style type="text/css">
+
+		.reveal .state-background .footer {
+			width:100%;
+			height: 100px;
+			position: fixed;
+			bottom:3px;
+			background-color: transparent;
+			/*background-image: url("img/footer.jpg");
+			background-size: 200px;
+			background-repeat: no-repeat;
+			background-position-x: 15px;
+			*/
+		}
+
+		.reveal .controls {
+			bottom: 94px;
+		}
+
+
+		.reveal .state-background .footer .top {
+			background-image: url("img/footer_top.png");
+			position: relative;
+			top: 0px;
+			width: 100%;
+			height: 11px;
+		}
+
+		.reveal .state-background .footer .logo {
+			background-image: url("img/slides-logo.jpg");
+			background-repeat: no-repeat;
+			background-size: 199px;
+			position: absolute;
+			right: 37px;
+			height: 90px;
+			width: 206px;
+			top: 34px;
+			float: right;
+
+		}
+		.reveal .state-background .footer .add {
+			width: 171px;
+			position: absolute;
+			top: 33px;
+			left: 91px;
+			font-family: "League Gothic", "Hiragino Sans GB W3", "Microsoft Yahei";
+			color: #12436b;
+		}
+
+		</style>
 	</head>
 
-	<body>
+	<body onload="footer();">
 		<div class="reveal">
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
@@ -100,6 +150,17 @@ String ctxPath = request.getContextPath();
 				]
 			});
 
+			function footer() {
+				var stateBg = document.querySelector("body .reveal .state-background");
+				var bginnerHtml = '';
+				bginnerHtml = '<div class="topper"></div>';
+				bginnerHtml += '<div class="footer">';
+				bginnerHtml += '<div class="top"></div>';
+				bginnerHtml += '<div class="add">www.liferay.com</div>';
+				bginnerHtml += '<div class="logo"></div>';
+				bginnerHtml += '</div>';
+				stateBg.innerHTML = bginnerHtml;
+			}
 		</script>
 
 	</body>

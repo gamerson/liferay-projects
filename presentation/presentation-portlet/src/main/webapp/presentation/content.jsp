@@ -5,7 +5,7 @@
     </section>
     <section data-background="#949cbe">
         <p>Gregory Amerson</p>
-        <p>Software Architect</p>
+        <p>Zhang Kuo</p>
     </section>
 </section>
 
@@ -35,7 +35,19 @@
         <img src="img/templates.png" />
     </section>
     <section data-background="#3f4a87">
+        <img src="img/wcm-app.png" />
+    </section>
+    <section data-background="#3f4a87">
         <h2>Kaleo Workflow Forms</h2>
+    </section>
+    <section data-background="#3f4a87">
+        <img src="img/forms1.png" />
+    </section>
+    <section data-background="#3f4a87">
+        <img src="img/forms2.png" />
+    </section>
+    <section data-background="#3f4a87">
+        <img src="img/forms3.png" />
     </section>
 </section>
 
@@ -55,6 +67,12 @@
         <p class="fragment roll-in">Liferay MVC</p>
         <p class="fragment roll-in">Liferay Faces</p>
         <p class="fragment roll-in">Vaadin</p>
+    </section>
+    <section data-background="#67799a">
+        <h2>Alloy UI</h2>
+    </section>
+    <section data-background="#67799a">
+        <img src="img/alloyui.png" />
     </section>
 </section>
 
@@ -78,7 +96,7 @@
 
 <section>
     <section data-background="#0a3581">
-        <h2>Liferay Developer Tools</h2>
+        <h2>Toolchains</h2>
         <p class="fragment roll-in">Plugins SDK</p>
         <p class="fragment roll-in">liferay-maven-plugin</p>
         <p class="fragment roll-in">Mobile SDK</p>
@@ -93,7 +111,8 @@
         <h2>Community</h2>
         <p class="fragment roll-in">Documentation</p>
         <p class="fragment roll-in">Forums</p>
-        <p class="fragment roll-in">Wikis, blogs, podcasts</p>
+        <p class="fragment roll-in">Wikis</p>
+        <p class="fragment roll-in">Blogs</p>
     </section>
 </section>
 
