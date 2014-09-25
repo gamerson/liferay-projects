@@ -14,21 +14,18 @@
     <aui:input id="gameType" name="gameType" type="hidden" value="medium"/>
         <aui:button-row id="typeButtons">
             <aui:button name="small" value="small" />
-            <aui:button cssClass="active" name="medium" value="medium" />
+            <aui:button name="medium" value="medium" />
             <aui:button name="large" value="large" />
         </aui:button-row>
-        <aui:button-row>
-            <aui:button type="submit" value="start-game" />
-        </aui:button-row>
+        <aui:button cssClass="btn-primary" type="submit" value="start-game" />
 </aui:form>
 
-
-<aui:script use="aui">
+<aui:script>
 YUI().use('aui-button', function(Y) {
     new Y.Button({
         boundingBox : '#typeButtons',
         type : 'radio'
-    }).render();
+    });
 
     Y.on('domready', function() {
         var gameType = Y.one('#<portlet:namespace/>gameType');
@@ -40,21 +37,3 @@ YUI().use('aui-button', function(Y) {
     });
 });
 </aui:script>
-
-<script type="text/javascript">
-YUI().use('aui-button', function(Y) {
-    new Y.Button({
-        boundingBox : '#typeButtons',
-        type : 'radio'
-    }).render();
-
-    Y.on('domready', function() {
-        var gameType = Y.one('#<portlet:namespace/>gameType');
-        Y.all('#typeButtons button').each(function(node){
-            node.on('click', function(){
-                gameType.setAttribute('value',node.get('id'));
-            });
-        });
-    });
-});
-</script>
