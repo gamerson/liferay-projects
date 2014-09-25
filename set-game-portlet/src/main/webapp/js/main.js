@@ -144,6 +144,7 @@ function loadImage(baseUrl) {
     for (var j = 0; j < 3; j++) {
         for (var i = 0; i < col; i++) {
             row_list[j][i] = total_td_list[j * col + i];
+            row_list[j][i].setAttribute("baseUrl", baseUrl);
             row_list[j][i].setAttribute("background", baseUrl + "/html/images/" + randomImage());
         }
     }
@@ -182,13 +183,12 @@ function chooseElement(e) {
             if (click_num == 3) {
                 judge_init();
                 if (judgeIsSet(set[0],set[1],set[2])) {
-        alert("It's good set!!");
-        exchange();
-    } else {
-        alert("It's bad set!!");
-        restore();
-    }
-
+			        alert("It's good set!!");
+			        exchange();
+			    } else {
+			        alert("It's bad set!!");
+			        restore();
+			    }
             }
         }
     } else {
@@ -220,7 +220,8 @@ function exchange() {
         if (flag == "checked") {
             td_a[i].setAttribute("name", "unchecked");
             td_a[i].setAttribute("style", "");
-            td_a[i].setAttribute("background", "images/" + randomImage());
+            var baseUrl = td_a[i].getAttribute("baseUrl");
+            td_a[i].setAttribute("background", baseUrl + "/html/images/" + randomImage());
 
             click_num = 0;
         }
@@ -233,14 +234,16 @@ function judge_init() {
     var m = 0;
     for (var i = 0; i < td_a.length; i++) {
         var flag = td_a[i].getAttribute("name");
-            var file_name = td_a[i].getAttribute("background").substr(7,4);
-            var set_instance = {
-                shape : file_name.substr(0, 1),
-                color : file_name.substr(1, 1),
-                fill : file_name.substr(2, 1),
-                number : file_name.substr(3, 1)
-            };
-            td_obj[i]=set_instance;
+        var background = td_a[i].getAttribute("background");
+        var idx = background.indexOf(".png");
+        var file_name = background.substr(idx-4,4);
+        var set_instance = {
+            shape : file_name.substr(0, 1),
+            color : file_name.substr(1, 1),
+            fill : file_name.substr(2, 1),
+            number : file_name.substr(3, 1)
+        };
+        td_obj[i]=set_instance;
         if (flag == "checked") {
             set[m] = set_instance;
             m++;
