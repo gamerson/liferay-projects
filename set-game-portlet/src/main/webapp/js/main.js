@@ -55,14 +55,14 @@ var e_array = new Array();
 var set = new Array();
 var td_obj=new Array();
 
-function setupSetGame(a) {
-    var e = document.getElementById("panel");
+function setupSetGame(gameType, panelId, imagesBaseUrl) {
+    var e = document.getElementById(panelId);
     var flag = document.getElementById("table");
     if (flag != null) {
         flag.parentNode.removeChild(flag);
 
     }
-    if (a == 1) {
+    if (gameType == "small") {
         var table = document.createElement("table");
         table.setAttribute("id", "table");
         table.setAttribute("border", "1");
@@ -83,10 +83,10 @@ function setupSetGame(a) {
         }
 
         e.appendChild(table);
-        loadImage();
+        loadImage(imagesBaseUrl);
 
-    } else if (a == 2) {
-        var e = document.getElementById("panel");
+    } else if (gameType == "medium") {
+        var e = document.getElementById(panelId);
         var table = document.createElement("table");
         table.setAttribute("id", "table");
         table.setAttribute("border", "1");
@@ -106,9 +106,9 @@ function setupSetGame(a) {
             table.appendChild(tr);
         }
         e.appendChild(table);
-        loadImage();
-    } else if (a == 3) {
-        var e = document.getElementById("panel");
+        loadImage(imagesBaseUrl);
+    } else if (gameType == "large") {
+        var e = document.getElementById(panelId);
         var table = document.createElement("table");
         table.setAttribute("id", "table");
         table.setAttribute("border", "1");
@@ -128,12 +128,11 @@ function setupSetGame(a) {
             table.appendChild(tr);
         }
         e.appendChild(table);
-        loadImage();
+        loadImage(imagesBaseUrl);
     }
-
 }
 
-function loadImage() {
+function loadImage(baseUrl) {
     var total_td_list = new Array();
     total_td_list = document.getElementsByTagName("td");
     var col = total_td_list.length / 3;
@@ -145,7 +144,7 @@ function loadImage() {
     for (var j = 0; j < 3; j++) {
         for (var i = 0; i < col; i++) {
             row_list[j][i] = total_td_list[j * col + i];
-            row_list[j][i].setAttribute("background", "images/" + randomImage());
+            row_list[j][i].setAttribute("background", baseUrl + "/html/images/" + randomImage());
         }
     }
 

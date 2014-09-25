@@ -6,16 +6,15 @@
 
 <%
 String gameType = ParamUtil.getString(request, "gameType");
+String ctxPath = request.getContextPath();
 %>
 
-
-<div id="<portlet:namespace/>-game">
+<div id="<portlet:namespace/>game">
 </div>
 
 <aui:script>
 YUI().use('aui-base', function(Y) {
-    Y.on('domready', function(){
-
-    });
+	var gameNode = Y.one('#<portlet:namespace/>game');
+	setupSetGame("<%=gameType%>", gameNode.get('id'), "<%=ctxPath%>");
 });
 </aui:script>
