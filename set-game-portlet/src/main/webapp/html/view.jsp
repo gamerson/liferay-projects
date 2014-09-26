@@ -20,14 +20,14 @@ String currentURL = currentURLObj.toString();
     <aui:input id="gameType" name="gameType" type="hidden" value="medium" />
     <aui:input name="backURL" type="hidden" value="<%= currentURL %>" />
 
-	<aui:button-row cssClass="game-type-container">
-		<aui:button name="small" value="small" />
-		<aui:button cssClass="active" name="medium" value="medium" />
-		<aui:button name="large" value="large" />
-	</aui:button-row>
-	<aui:button-row>
-		<aui:button type="submit" value="start-game"/>
-	</aui:button-row>
+    <aui:button-row cssClass="game-type-container">
+        <aui:button name="small" value="small" />
+        <aui:button cssClass="active" name="medium" value="medium" />
+        <aui:button name="large" value="large" />
+    </aui:button-row>
+    <aui:button-row>
+        <aui:button type="submit" value="start-game"/>
+    </aui:button-row>
 
 </aui:form>
 
