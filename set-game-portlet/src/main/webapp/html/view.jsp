@@ -11,12 +11,12 @@ PortletURL currentURLObj = PortletURLUtil.getCurrent(liferayPortletRequest, life
 String currentURL = currentURLObj.toString();
 %>
 
-<portlet:actionURL name="startGame" var="startGameUrl" />
+<portlet:actionURL name="beginGame" var="beginGameUrl" />
 
 <liferay-ui:header title="set-game" />
 <liferay-ui:message key="please-select-game-size" />
 
-<aui:form action="<%=startGameUrl%>" method="post" name="start-game-form">
+<aui:form action="<%=beginGameUrl%>" method="post" name="start-game-form">
     <aui:input id="gameType" name="gameType" type="hidden" value="medium" />
     <aui:input name="backURL" type="hidden" value="<%= currentURL %>" />
 
@@ -32,17 +32,17 @@ String currentURL = currentURLObj.toString();
 </aui:form>
 
 <aui:script>
-YUI().use('aui-button', function(Y) {
-    new Y.ButtonGroup({
+AUI().use('aui-button', function(A) {
+    new A.ButtonGroup({
         boundingBox : 'div.game-type-container',
         type : 'radio'
     }).render();
 
-    Y.on('domready', function() {
-        var gameType = Y.one('#<portlet:namespace/>gameType');
-        Y.all('div.game-type-container button').each(function(node){
+    A.on('domready', function() {
+        var gameType = A.one('#<portlet:namespace/>gameType');
+        A.all('div.game-type-container button').each(function(node){
             node.on('click', function(){
-                gameType.setAttribute('value',node.get('id'));
+            	gameType.set('value',node.get('id'));
             });
         });
     });

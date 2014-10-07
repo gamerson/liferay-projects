@@ -12,7 +12,7 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
 public class SetGamePortlet extends MVCPortlet
 {
 
-    public void startGame( ActionRequest actionRequest, ActionResponse actionResponse ) {
+    public void beginGame( ActionRequest actionRequest, ActionResponse actionResponse ) {
         final String gameTypeParam = ParamUtil.getString( actionRequest, "gameType" );
         final String backURL = ParamUtil.getString( actionRequest, "backURL" );
 
