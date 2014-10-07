@@ -17,8 +17,8 @@ String ctxPath = request.getContextPath();
 </div>
 
 <aui:script>
-YUI().use('aui-base', function(Y) {
-	var gameNode = Y.one('#<portlet:namespace/>game');
+AUI().use('aui-base', function(A) {
+	var gameNode = A.one('#<portlet:namespace/>game');
 	setupSetGame("<%=gameType%>", gameNode.get('id'), "<%=ctxPath%>");
 });
 </aui:script>
