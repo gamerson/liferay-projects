@@ -8,6 +8,8 @@
 <%
 String gameType = ParamUtil.getString(request, "gameType");
 String backURL = ParamUtil.getString(request, "backURL");
+long startUserId = ParamUtil.getLong(request, "startUserId");
+long inviteUserId = ParamUtil.getLong(request, "inviteUserId");
 String ctxPath = request.getContextPath();
 %>
 
@@ -15,10 +17,9 @@ String ctxPath = request.getContextPath();
 
 <div id="<portlet:namespace/>game">
 </div>
-
 <aui:script>
 AUI().use('aui-base', function(A) {
 	var gameNode = A.one('#<portlet:namespace/>game');
-	setupSetGame("<%=gameType%>", gameNode.get('id'), "<%=ctxPath%>");
+	startGame("<%=gameType%>", gameNode.get('id'), "<%=ctxPath%>", "<%=startUserId%>", "<%=inviteUserId%>");
 });
 </aui:script>

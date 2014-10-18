@@ -25,10 +25,12 @@ String currentURL = currentURLObj.toString();
         <aui:button cssClass="active" name="medium" value="medium" />
         <aui:button name="large" value="large" />
     </aui:button-row>
+
+    <aui:input label="invite-player" name="invitePlayer" type="text" value="test.dlc.1@liferay.com" />
+
     <aui:button-row>
         <aui:button type="submit" value="start-game"/>
     </aui:button-row>
-
 </aui:form>
 
 <aui:script>

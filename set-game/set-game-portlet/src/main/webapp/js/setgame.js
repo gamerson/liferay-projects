@@ -55,6 +55,7 @@ var e_array = new Array();
 var set = new Array();
 var td_obj=new Array();
 
+
 function setupSetGame(gameType, panelId, imagesBaseUrl) {
     var e = document.getElementById(panelId);
     var flag = document.getElementById("table");
