@@ -14,7 +14,7 @@ PortletURL currentURLObj = PortletURLUtil.getCurrent(liferayPortletRequest, life
 String currentURL = currentURLObj.toString();
 %>
 
-<portlet:actionURL name="beginGame" var="beginGameUrl" />
+<portlet:actionURL name="startGame" var="beginGameUrl" />
 
 <liferay-ui:header title="set-game" />
 
@@ -23,7 +23,8 @@ String currentURL = currentURLObj.toString();
 
     <aui:form action="<%=beginGameUrl%>" method="post" name="start-game-form">
         <aui:input id="gameType" name="gameType" type="hidden" value="medium" />
-        <aui:input name="backURL" type="hidden" value="<%= currentURL %>" />
+        <aui:input id="backURL" name="backURL" type="hidden" value="<%= currentURL %>" />
+        <aui:input id="invite" name="invite" type="hidden" value="true" />
 
         <aui:button-row cssClass="game-type-container">
             <aui:button name="small" value="small" />
@@ -51,6 +52,19 @@ String currentURL = currentURLObj.toString();
                 node.on('click', function(){
                     gameType.set('value',node.get('id'));
                 });
+            });
+        });
+    });
+
+    AUI().use('aui', function(A) {
+        A.on('domready',function() {
+            checkForInvite(function(gameData){
+                if( confirm("You have been invited to a Set game. Would you like to join now?") ) {
+                    var form = A.one('#<portlet:namespace/>start-game-form');
+                    var invite = A.one('#<portlet:namespace/>invite');
+                    invite.set('value', false);
+                    form.submit();
+                }
             });
         });
     });

@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 <%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %>
 <%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <portlet:defineObjects/>
 
@@ -10,6 +11,7 @@ String gameType = ParamUtil.getString(request, "gameType");
 String backURL = ParamUtil.getString(request, "backURL");
 long startUserId = ParamUtil.getLong(request, "startUserId");
 long inviteUserId = ParamUtil.getLong(request, "inviteUserId");
+boolean invite = ParamUtil.getBoolean(request, "invite");
 String ctxPath = request.getContextPath();
 %>
 
@@ -17,9 +19,15 @@ String ctxPath = request.getContextPath();
 
 <div id="<portlet:namespace/>game">
 </div>
+
+<c:if test="<%=invite%>">
+    <liferay-ui:message key="waiting-for-invited-player" />
+
+</c:if>
+
 <aui:script>
 AUI().use('aui-base', function(A) {
-	var gameNode = A.one('#<portlet:namespace/>game');
-	startGame("<%=gameType%>", gameNode.get('id'), "<%=ctxPath%>", "<%=startUserId%>", "<%=inviteUserId%>");
+    var gameNode = A.one('#<portlet:namespace/>game');
+    startGame("<%=gameType%>", gameNode.get('id'), "<%=ctxPath%>", "<%=invite%>", "<%=startUserId%>", "<%=inviteUserId%>");
 });
 </aui:script>

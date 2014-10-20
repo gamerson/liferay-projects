@@ -1,12 +1,5 @@
 function newGameData(gameType, baseUrl) {
-    var total_td_list = new Array(gameSize(gameType));
-    total_td_list.forEach(function(e){
-    	e = {
-			baseUrl:"",
-			background:""
-    	};
-    });
-    var col = total_td_list.length / 3;
+    var col = gameSize(gameType) / 3;
     var row_a = new Array();
     var row_b = new Array();
     var row_c = new Array();
@@ -14,12 +7,14 @@ function newGameData(gameType, baseUrl) {
 
     for (var j = 0; j < 3; j++) {
         for (var i = 0; i < col; i++) {
-            row_list[j][i] = total_td_list[j * col + i];
-            row_list[j][i].baseUrl = baseUrl;
-            row_list[j][i].background = baseUrl + "/html/images/" + randomImage();
+            row_list[j][i] = {
+                 baseUrl: baseUrl,
+                 background: baseUrl + "/html/images/" + randomImage()
+            }
         }
     }
-    JSON.stringify(total_td_list);
+
+    return JSON.stringify(row_list);
 }
 
 function randomImage() {
@@ -39,19 +34,46 @@ function randomImage() {
     }
 }
 
-function startGame(gameType, panelId, imagesBaseUrl, inviteUserId) {
-	var ws = new WebSocket("ws://localhost:8080/set-game-portlet/wschat/WsChatServlet");
+function startGame(gameType, panelId, imagesBaseUrl, invite, startUserId, inviteUserId) {
+    var userId = Liferay.ThemeDisplay.getUserId();
+    var ws = new WebSocket("ws://localhost:8080/set-game-portlet/game/SetGameServlet?userId=" + userId);
+
     ws.onopen = function() {
-    	var gameData = newGameData(gameType, imagesBaseUrl);
-    	ws.send("startGame " + Liferay.ThemeDisplay.getUserId() + " " + inviteUserId + " " + gameData);
+        console.log('connection open invite ' + invite);
+        if(invite == "true") {
+            var gameData = newGameData(gameType, imagesBaseUrl);
+            ws.send("startGame " + startUserId + " " + inviteUserId + " " + gameData);
+        }
+        else {
+            ws.send("begin");
+        }
+    }
+
+    ws.onmessage = function(msg) {
+        if(msg.data == "start") {
+            setupSetGame(gameType, panelId, imagesBaseUrl);
+        }
+    }
+}
+
+function checkForInvite(callback) {
+    var userId = Liferay.ThemeDisplay.getUserId();
+    var ws = new WebSocket("ws://localhost:8080/set-game-portlet/game/SetGameServlet?userId=" + userId);
+
+    ws.onmessage = function(msg) {
+        if(msg.data.lastIndexOf("joinGame", 0) === 0 ) {
+            AUI().use('aui', function(A) {
+                callback();
+            });
+        }
     }
 }
 
 function gameSize(gameType) {
-	if ("large" == gameType)
-		return 15;
-	if ("small" == gameType)
-		return 9;
+    if ("large" == gameType)
+        return 15;
+    if ("small" == gameType)
+        return 9;
 
-	return 12;
+    return 12;
 }

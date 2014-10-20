@@ -57,6 +57,7 @@ var td_obj=new Array();
 
 
 function setupSetGame(gameType, panelId, imagesBaseUrl) {
+    alert('SHOW GAME');
     var e = document.getElementById(panelId);
     var flag = document.getElementById("table");
     if (flag != null) {
