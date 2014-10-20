@@ -1,16 +1,14 @@
-function newGameData(gameType, baseUrl) {
-    var col = gameSize(gameType) / 3;
+function newGameData(baseUrl) {
+    var numCols = 4;
+    var numRows = 3;
     var row_a = new Array();
     var row_b = new Array();
     var row_c = new Array();
     var row_list = [row_a, row_b, row_c];
 
-    for (var j = 0; j < 3; j++) {
-        for (var i = 0; i < col; i++) {
-            row_list[j][i] = {
-                 baseUrl: baseUrl,
-                 background: baseUrl + "/html/images/" + randomImage()
-            }
+    for (var i = 0; i < numRows; i++) {
+        for (var j = 0; j < numCols; j++) {
+            row_list[i][j] = { background: baseUrl + "/html/images/" + randomImage() }
         }
     }
 
@@ -34,24 +32,41 @@ function randomImage() {
     }
 }
 
-function startGame(gameType, panelId, imagesBaseUrl, invite, startUserId, inviteUserId) {
+function startGame(panelId, imagesBaseUrl, invite, startUserId, inviteUserId) {
     var userId = Liferay.ThemeDisplay.getUserId();
     var ws = new WebSocket("ws://localhost:8080/set-game-portlet/game/SetGameServlet?userId=" + userId);
+
+    var gameData = "";
+
+    var success = function(set0, set1, set2) {
+        ws.send("foundSet " + set0 + " " + set1 + " " + set2);
+    };
 
     ws.onopen = function() {
         console.log('connection open invite ' + invite);
         if(invite == "true") {
-            var gameData = newGameData(gameType, imagesBaseUrl);
+            gameData = newGameData(imagesBaseUrl);
             ws.send("startGame " + startUserId + " " + inviteUserId + " " + gameData);
         }
         else {
-            ws.send("begin");
+            ws.send("ready");
         }
     }
 
     ws.onmessage = function(msg) {
-        if(msg.data == "start") {
-            setupSetGame(gameType, panelId, imagesBaseUrl);
+        if(msg.data == "ready") {
+            ws.send("gameData " + gameData);
+        }
+        else if(msg.data.lastIndexOf("gameData", 0) === 0 ) {
+            gameData = msg.data.substr("gameData ".length, msg.data.length);
+            setupSetGame(panelId, gameData, success);
+            ws.send("start");
+        }
+        else if(msg.data == "start") {
+            setupSetGame(panelId, gameData, success);
+        }
+        else if(msg.data.lastIndexOf("foundSet ", 0) === 0 ) {
+            alert('other player found set ' + msg.data.substr("foundSet ".length, msg.data.length));
         }
     }
 }
@@ -67,13 +82,4 @@ function checkForInvite(callback) {
             });
         }
     }
-}
-
-function gameSize(gameType) {
-    if ("large" == gameType)
-        return 15;
-    if ("small" == gameType)
-        return 9;
-
-    return 12;
 }

@@ -56,85 +56,44 @@ var set = new Array();
 var td_obj=new Array();
 
 
-function setupSetGame(gameType, panelId, imagesBaseUrl) {
-    alert('SHOW GAME');
+function setupSetGame(panelId, gameData, success) {
     var e = document.getElementById(panelId);
+    e.removeChild(e.firstChild);
+
     var flag = document.getElementById("table");
     if (flag != null) {
         flag.parentNode.removeChild(flag);
-
     }
-    if (gameType == "small") {
-        var table = document.createElement("table");
-        table.setAttribute("id", "table");
-        table.setAttribute("border", "1");
+    var numCols = 4;
+    var numRows = 3;
 
-        for (var i = 1; i <= 3; i++) {
-            var tr = document.createElement("tr");
+    var table = document.createElement("table");
+    table.setAttribute("id", "table");
+    table.setAttribute("border", "1");
 
-            for (var j = 1; j <= 3; j++) {
-                var td = document.createElement("td");
-                td.setAttribute("width", "160px");
-                td.setAttribute("height", "160px");
-                td.setAttribute("name", "unchecked");
-                td.setAttribute("onclick", "chooseElement(event)");
-                tr.appendChild(td);
+    for (var i = 1; i <= numRows; i++) {
+        var tr = document.createElement("tr");
 
-            }
-            table.appendChild(tr);
+        for (var j = 1; j <= numCols; j++) {
+            var td = document.createElement("td");
+            td.setAttribute("width", "160px");
+            td.setAttribute("height", "160px");
+            td.setAttribute("name", "unchecked");
+            td.onclick = function(e) {
+                chooseElement(e, success);
+            };
+            tr.appendChild(td);
         }
-
-        e.appendChild(table);
-        loadImage(imagesBaseUrl);
-
-    } else if (gameType == "medium") {
-        var e = document.getElementById(panelId);
-        var table = document.createElement("table");
-        table.setAttribute("id", "table");
-        table.setAttribute("border", "1");
-
-        for (var i = 1; i <= 3; i++) {
-            var tr = document.createElement("tr");
-
-            for (var j = 1; j <= 4; j++) {
-                var td = document.createElement("td");
-                td.setAttribute("width", "160px");
-                td.setAttribute("height", "160px");
-                td.setAttribute("name", "unchecked");
-                td.setAttribute("onclick", "chooseElement(event)");
-                tr.appendChild(td);
-
-            }
-            table.appendChild(tr);
-        }
-        e.appendChild(table);
-        loadImage(imagesBaseUrl);
-    } else if (gameType == "large") {
-        var e = document.getElementById(panelId);
-        var table = document.createElement("table");
-        table.setAttribute("id", "table");
-        table.setAttribute("border", "1");
-
-        for (var i = 1; i <= 3; i++) {
-            var tr = document.createElement("tr");
-
-            for (var j = 1; j <= 5; j++) {
-                var td = document.createElement("td");
-                td.setAttribute("width", "160px");
-                td.setAttribute("height", "160px");
-                td.setAttribute("name", "unchecked");
-                td.setAttribute("onclick", "chooseElement(event)");
-                tr.appendChild(td);
-
-            }
-            table.appendChild(tr);
-        }
-        e.appendChild(table);
-        loadImage(imagesBaseUrl);
+        table.appendChild(tr);
     }
+
+    e.appendChild(table);
+    loadImage(gameData);
 }
 
-function loadImage(baseUrl) {
+function loadImage(gameData) {
+    var data = JSON.parse(gameData);
+
     var total_td_list = new Array();
     total_td_list = document.getElementsByTagName("td");
     var col = total_td_list.length / 3;
@@ -146,8 +105,7 @@ function loadImage(baseUrl) {
     for (var j = 0; j < 3; j++) {
         for (var i = 0; i < col; i++) {
             row_list[j][i] = total_td_list[j * col + i];
-            row_list[j][i].setAttribute("baseUrl", baseUrl);
-            row_list[j][i].setAttribute("background", baseUrl + "/html/images/" + randomImage());
+            row_list[j][i].setAttribute("background", data[j][i].background);
         }
     }
 
@@ -170,7 +128,7 @@ function randomImage() {
     }
 }
 
-function chooseElement(e) {
+function chooseElement(e, success) {
     if (!e) {
         var e = window.event;
     }
@@ -185,19 +143,18 @@ function chooseElement(e) {
             if (click_num == 3) {
                 judge_init();
                 if (judgeIsSet(set[0],set[1],set[2])) {
-			        alert("It's good set!!");
-			        exchange();
-			    } else {
-			        alert("It's bad set!!");
-			        restore();
-			    }
+                    success(set[0],set[1],set[2]);
+                    exchange();
+                } else {
+                    alert("bad set");
+                    restore();
+                }
             }
         }
     } else {
         targ.setAttribute("name", "unchecked");
         targ.setAttribute("style", "");
         click_num--;
-
     }
 }
 

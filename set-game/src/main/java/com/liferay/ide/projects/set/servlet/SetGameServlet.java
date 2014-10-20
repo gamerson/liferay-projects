@@ -49,16 +49,7 @@ public class SetGameServlet extends WebSocketServlet {
                     try {
                         inviteEndpoint.myoutbound.writeTextMessage(CharBuffer.wrap("joinGame " + setGame.getStartUserId()));
                         inviteEndpoint.myoutbound.flush();
-
-//                        MyMessageInbound startEndpoint = endpoints.get(setGame.getStartUserId());
-//
-//                        if( startEndpoint != null )
-//                        {
-//                            startEndpoint.myoutbound.writeTextMessage(CharBuffer.wrap("startGame " + setGame.getGameData()));
-//                            startEndpoint.myoutbound.flush();
-//                        }
                     } catch (IOException e) {
-                        // TODO Auto-generated catch block
                         e.printStackTrace();
                     }
                 }
@@ -85,20 +76,30 @@ public class SetGameServlet extends WebSocketServlet {
                 setGames.put(startUserId, newGame);
                 setGames.put(inviteUserId, newGame);
             }
-            else if("begin".equals(cmd)) {
+            else if("ready".equals(cmd)) {
+                SetGame setGame = setGames.get(this.endpointUserId);
+                endpoints.get(endpointUserId).myoutbound.writeTextMessage(CharBuffer.wrap("gameData " + setGame.getGameData()));
+                endpoints.get(endpointUserId).myoutbound.flush();
+            }
+            else if("start".equals(cmd)) {
                 for( String userId : endpoints.keySet() ) {
-                    endpoints.get(userId).myoutbound.writeTextMessage(CharBuffer.wrap("start"));
-                    endpoints.get(userId).myoutbound.flush();
+                    if(!userId.equals(endpointUserId)) {
+                        endpoints.get(userId).myoutbound.writeTextMessage(CharBuffer.wrap("start"));
+                        endpoints.get(userId).myoutbound.flush();
+                    }
                 }
             }
-
-//            for (MyMessageInbound mmib : mmiList) {
-//                CharBuffer buffer = CharBuffer.wrap(cb);
-
-                // mmib.myoutbound.writeTextMessage(buffer);
-                // mmib.myoutbound.writeTextMessage(CharBuffer.wrap("response"));
-                // mmib.myoutbound.flush();
-//            }
+            else if("foundSet".equals(cmd)) {
+                for( String userId : endpoints.keySet() ) {
+                    if(!userId.equals(endpointUserId)) {
+                        endpoints.get(userId).myoutbound.writeTextMessage(CharBuffer.wrap(message));
+                        endpoints.get(userId).myoutbound.flush();
+                    }
+                }
+            }
+            else {
+                System.out.println(cmd);
+            }
         }
 
         @Override

@@ -7,7 +7,6 @@
 <portlet:defineObjects/>
 
 <%
-String gameType = ParamUtil.getString(request, "gameType");
 String backURL = ParamUtil.getString(request, "backURL");
 long startUserId = ParamUtil.getLong(request, "startUserId");
 long inviteUserId = ParamUtil.getLong(request, "inviteUserId");
@@ -18,16 +17,12 @@ String ctxPath = request.getContextPath();
 <liferay-ui:header title="start-playing" backURL="<%= backURL %>"/>
 
 <div id="<portlet:namespace/>game">
+    <liferay-ui:message key="waiting-for-other-player" />
 </div>
-
-<c:if test="<%=invite%>">
-    <liferay-ui:message key="waiting-for-invited-player" />
-
-</c:if>
 
 <aui:script>
 AUI().use('aui-base', function(A) {
     var gameNode = A.one('#<portlet:namespace/>game');
-    startGame("<%=gameType%>", gameNode.get('id'), "<%=ctxPath%>", "<%=invite%>", "<%=startUserId%>", "<%=inviteUserId%>");
+    startGame(gameNode.get('id'), "<%=ctxPath%>", "<%=invite%>", "<%=startUserId%>", "<%=inviteUserId%>");
 });
 </aui:script>
