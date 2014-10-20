@@ -18,7 +18,7 @@ import org.apache.catalina.websocket.WsOutbound;
 
 import com.liferay.ide.projects.set.SetGame;
 
-public class WsChatServlet extends WebSocketServlet
+public class SetGameServlet extends WebSocketServlet
 {
     private static final long serialVersionUID = 1L;
     private static ArrayList<MyMessageInbound> mmiList = new ArrayList<MyMessageInbound>();
