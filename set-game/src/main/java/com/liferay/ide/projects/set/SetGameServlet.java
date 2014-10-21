@@ -1,5 +1,5 @@
 //This sample is how to use websocket of Tomcat.
-package com.liferay.ide.projects.set.servlet;
+package com.liferay.ide.projects.set;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -15,12 +15,34 @@ import org.apache.catalina.websocket.StreamInbound;
 import org.apache.catalina.websocket.WebSocketServlet;
 import org.apache.catalina.websocket.WsOutbound;
 
-import com.liferay.ide.projects.set.SetGame;
-
 public class SetGameServlet extends WebSocketServlet {
     private static final long serialVersionUID = 1L;
     private static Map<String, MyMessageInbound> endpoints = new HashMap<String, SetGameServlet.MyMessageInbound>();
     private static Map<String, SetGame> setGames = new HashMap<String, SetGame>();
+
+    private static class SetGame {
+        private final String startUserId;
+        private final String inviteUserId;
+        private final String gameData;
+
+        public SetGame(String startUserId, String inviteUserId, String gameData) {
+            this.startUserId = startUserId;
+            this.inviteUserId = inviteUserId;
+            this.gameData = gameData;
+        }
+
+        public String getStartUserId() {
+            return startUserId;
+        }
+
+        public String getInviteUserId() {
+            return inviteUserId;
+        }
+
+        public String getGameData() {
+            return gameData;
+        }
+    }
 
     @Override
     public StreamInbound createWebSocketInbound(String protocol, HttpServletRequest arg1) {

@@ -7,7 +7,7 @@
     <portlet>
         <portlet-name>set-game</portlet-name>
         <display-name>Set Game</display-name>
-        <portlet-class>com.liferay.ide.projects.set.portlet.SetGamePortlet</portlet-class>
+        <portlet-class>com.liferay.ide.projects.set.SetGamePortlet</portlet-class>
         <init-param>
             <name>view-template</name>
             <value>/html/view.jsp</value>

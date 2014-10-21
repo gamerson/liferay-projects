@@ -1,4 +1,4 @@
-package com.liferay.ide.projects.set.portlet;
+package com.liferay.ide.projects.set;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
