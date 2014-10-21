@@ -7,7 +7,6 @@ function startGame(host, panelId, imagesBaseUrl, invite, startUserId, inviteUser
 
     var success = function(set0, set1, set2) {
         AUI().use('aui-node', function(A) {
-            debugger;
             var node = A.one("#score");
             var currentScore = parseInt(node.text());
             currentScore++;
@@ -49,7 +48,6 @@ function startGame(host, panelId, imagesBaseUrl, invite, startUserId, inviteUser
             alert('other player found a set');
 
             AUI().use('aui-node', function(A) {
-                debugger;
                 var node = A.one("#otherscore");
                 var currentScore = parseInt(node.text());
                 currentScore++;
