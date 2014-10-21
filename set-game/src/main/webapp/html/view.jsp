@@ -12,6 +12,7 @@
 <%
 PortletURL currentURLObj = PortletURLUtil.getCurrent(liferayPortletRequest, liferayPortletResponse);
 String currentURL = currentURLObj.toString();
+String host = themeDisplay.getServerName() + ":" + themeDisplay.getServerPort();
 %>
 
 <portlet:actionURL name="startGame" var="beginGameUrl" />
@@ -40,7 +41,7 @@ String currentURL = currentURLObj.toString();
 
     AUI().use('aui', function(A) {
         A.on('domready',function() {
-            checkForInvite(function(){
+            checkForInvite("<%=host%>", function(){
                 if( confirm("You have been invited to a Set game. Would you like to join now?") ) {
                     var form = A.one('#<portlet:namespace/>start-game-form');
                     var invite = A.one('#<portlet:namespace/>invite');

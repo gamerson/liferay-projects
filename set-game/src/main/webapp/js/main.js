@@ -1,7 +1,7 @@
 
-function startGame(panelId, imagesBaseUrl, invite, startUserId, inviteUserId) {
+function startGame(host, panelId, imagesBaseUrl, invite, startUserId, inviteUserId) {
     var userId = Liferay.ThemeDisplay.getUserId();
-    var ws = new WebSocket("ws://localhost:8080/set-game-portlet/game/SetGameServlet?userId=" + userId);
+    var ws = new WebSocket("ws://" + host + "/set-game-portlet/game/SetGameServlet?userId=" + userId);
 
     var gameData = "";
 
@@ -62,9 +62,9 @@ function startGame(panelId, imagesBaseUrl, invite, startUserId, inviteUserId) {
     }
 }
 
-function checkForInvite(callback) {
+function checkForInvite(host, callback) {
     var userId = Liferay.ThemeDisplay.getUserId();
-    var ws = new WebSocket("ws://localhost:8080/set-game-portlet/game/SetGameServlet?userId=" + userId);
+    var ws = new WebSocket("ws://" + host + "/set-game-portlet/game/SetGameServlet?userId=" + userId);
 
     ws.onmessage = function(msg) {
         if(msg.data.lastIndexOf("joinGame", 0) === 0 ) {
