@@ -4,3 +4,13 @@
 .waiting-node{
 }
 
+.left-div {
+    float: left;
+    width: 900px;
+    height: 400px;
+    margin-right: 8px;
+}
+
+.right-div {
+    margin-left: 108px;
+}​​

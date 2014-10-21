@@ -16,9 +16,15 @@ String ctxPath = request.getContextPath();
 
 <liferay-ui:header title="start-playing" backURL="<%= backURL %>"/>
 
-<div id="<portlet:namespace/>game">
+<div class="left-div" id="<portlet:namespace/>game">
     <liferay-ui:message key="waiting-for-other-player" />
 </div>
+<div class="right-div">
+    <p>Sets found</p>
+    <p>You: <span id="score">0</span></p>
+    <p>Opponent: <span id="otherscore">0</span></p>
+</div>
+<div style='clear:both;'>&nbsp;</div>
 
 <aui:script>
 AUI().use('aui-base', function(A) {

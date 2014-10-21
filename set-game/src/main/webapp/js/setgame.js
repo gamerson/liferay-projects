@@ -105,10 +105,30 @@ function loadImage(gameData) {
     for (var j = 0; j < 3; j++) {
         for (var i = 0; i < col; i++) {
             row_list[j][i] = total_td_list[j * col + i];
+            row_list[j][i].setAttribute("baseUrl", data[j][i].baseUrl);
             row_list[j][i].setAttribute("background", data[j][i].background);
         }
     }
+}
 
+function newGameData(baseUrl) {
+    var numCols = 4;
+    var numRows = 3;
+    var row_a = new Array();
+    var row_b = new Array();
+    var row_c = new Array();
+    var row_list = [row_a, row_b, row_c];
+
+    for (var i = 0; i < numRows; i++) {
+        for (var j = 0; j < numCols; j++) {
+            row_list[i][j] = {
+                baseUrl: baseUrl,
+                background: baseUrl + "/html/images/" + randomImage()
+            }
+        }
+    }
+
+    return JSON.stringify(row_list);
 }
 
 function randomImage() {
@@ -144,7 +164,7 @@ function chooseElement(e, success) {
                 judge_init();
                 if (judgeIsSet(set[0],set[1],set[2])) {
                     success(set[0],set[1],set[2]);
-                    exchange();
+                    //exchange();
                 } else {
                     alert("bad set");
                     restore();
@@ -171,19 +191,63 @@ function restore() {
     }
 }
 
-function exchange() {
-    var td_a = new Array();
-    td_a = document.getElementsByTagName("td");
-    for (var i = 0; i < td_a.length; i++) {
+function showSet(set1, set2, set3) {
+    var sets = [set1,set2,set3];
+    var td_a = document.getElementsByTagName("td");
+
+    for(var i = 0; i < td_a.length; i++) {
         var flag = td_a[i].getAttribute("name");
         if (flag == "checked") {
             td_a[i].setAttribute("name", "unchecked");
             td_a[i].setAttribute("style", "");
-            var baseUrl = td_a[i].getAttribute("baseUrl");
-            td_a[i].setAttribute("background", baseUrl + "/html/images/" + randomImage());
-
-            click_num = 0;
         }
+    }
+
+    for(var i = 0; i < td_a.length; i++) {
+        for(var j = 0; j < 3; j++) {
+            if(sets[j].background == td_a[i].getAttribute("background")) {
+                td_a[i].setAttribute("style", "border:3px solid red;");
+                td_a[i].setAttribute("name", "checked");
+            }
+        }
+    }
+}
+
+function exchange(set1, set2, set3, newCardsStr) {
+    var td_a = document.getElementsByTagName("td");
+
+    if(set1) {
+        var j=0;
+        var newCards = JSON.parse(newCardsStr);
+        for(var i = 0; i < td_a.length; i++) {
+            if(td_a[i].getAttribute("name") == "checked" ) {
+                td_a[i].setAttribute("background", newCards[j++].background);
+                td_a[i].setAttribute("name", "unchecked");
+                td_a[i].setAttribute("style", "");
+            }
+        }
+    }
+    else {
+        var newCards = new Array();
+        for (var i = 0; i < td_a.length; i++) {
+            var flag = td_a[i].getAttribute("name");
+            if (flag == "checked") {
+                td_a[i].setAttribute("name", "unchecked");
+                td_a[i].setAttribute("style", "");
+                var baseUrl = td_a[i].getAttribute("baseUrl");
+                var background = baseUrl + "/html/images/" + randomImage();
+                td_a[i].setAttribute("background", background);
+
+                newCards.push({
+                    baseUrl: baseUrl,
+                    background: background
+                });
+
+                click_num = 0;
+            }
+        }
+
+        return JSON.stringify(newCards);
     }
 }
 
@@ -197,6 +261,7 @@ function judge_init() {
         var idx = background.indexOf(".png");
         var file_name = background.substr(idx-4,4);
         var set_instance = {
+            background: background,
             shape : file_name.substr(0, 1),
             color : file_name.substr(1, 1),
             fill : file_name.substr(2, 1),
@@ -224,11 +289,8 @@ function judgeIsSet(a, b, c) {
                     shape_a[set[1].shape-1][set[1].color-1][set[1].fill-1][set[1].number-1];
                     shape_a[set[2].shape-1][set[2].color-1][set[2].fill-1][set[2].number-1];
                 }
-
             }
-
         }
-
     }
 
     return flag;
@@ -252,7 +314,7 @@ function isThereSet(a){
             for(var k=j+1;k<a.length;k++){
                 temp=judgeIsSet(a[i],a[j],a[k]);
                 if(temp){
-                    // alert("("+a[i].shape+a[i].color+a[i].fill+a[i].number+")("+a[j].shape+a[j].color+a[j].fill+a[j].number+")("+a[k].shape+a[k].color+a[k].fill+a[k].number+")");
+                    //alert("("+a[i].shape+a[i].color+a[i].fill+a[i].number+")("+a[j].shape+a[j].color+a[j].fill+a[j].number+")("+a[k].shape+a[k].color+a[k].fill+a[k].number+")");
                     flag=true;
                 }
             }
