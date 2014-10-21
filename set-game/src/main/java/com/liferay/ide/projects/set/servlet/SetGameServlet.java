@@ -36,7 +36,7 @@ public class SetGameServlet extends WebSocketServlet {
         }
 
         @Override
-        public void onOpen(WsOutbound outbound) {
+        public synchronized void onOpen(WsOutbound outbound) {
             this.myoutbound = outbound;
             endpoints.put(endpointUserId, this);
 
@@ -57,12 +57,12 @@ public class SetGameServlet extends WebSocketServlet {
         }
 
         @Override
-        public void onClose(int status) {
+        public synchronized void onClose(int status) {
             endpoints.remove(endpointUserId);
         }
 
         @Override
-        public void onTextMessage(CharBuffer cb) throws IOException {
+        public synchronized void onTextMessage(CharBuffer cb) throws IOException {
             final String message = cb.toString();
             StringTokenizer tokenizer = new StringTokenizer(message, " ");
             String cmd = tokenizer.nextToken();
