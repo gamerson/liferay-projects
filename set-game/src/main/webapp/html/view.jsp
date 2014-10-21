@@ -1,5 +1,7 @@
 <%@ page import="javax.portlet.PortletURL"%>
 <%@ page import="com.liferay.portlet.PortletURLUtil" %>
+<%@ page import="com.liferay.portal.util.PortalUtil" %>
+
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 <%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %>
 <%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
@@ -12,7 +14,7 @@
 <%
 PortletURL currentURLObj = PortletURLUtil.getCurrent(liferayPortletRequest, liferayPortletResponse);
 String currentURL = currentURLObj.toString();
-String host = themeDisplay.getServerName() + ":" + themeDisplay.getServerPort();
+String host = PortalUtil.getPortalURL(request);
 %>
 
 <portlet:actionURL name="startGame" var="beginGameUrl" />

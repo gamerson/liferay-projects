@@ -1,4 +1,6 @@
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
+<%@ page import="com.liferay.portal.util.PortalUtil" %>
+
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 <%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %>
 <%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
@@ -14,7 +16,7 @@ long startUserId = ParamUtil.getLong(request, "startUserId");
 long inviteUserId = ParamUtil.getLong(request, "inviteUserId");
 boolean invite = ParamUtil.getBoolean(request, "invite");
 String ctxPath = request.getContextPath();
-String host = themeDisplay.getServerName() + ":" + themeDisplay.getServerPort();
+String host = PortalUtil.getPortalURL(request);
 %>
 
 <liferay-ui:header title="start-playing" backURL="<%= backURL %>"/>
