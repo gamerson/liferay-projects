@@ -56,6 +56,14 @@ public class TodoLocalServiceClp implements TodoLocalService {
     private String[] _methodParameterTypes23;
     private String _methodName24;
     private String[] _methodParameterTypes24;
+    private String _methodName25;
+    private String[] _methodParameterTypes25;
+    private String _methodName26;
+    private String[] _methodParameterTypes26;
+    private String _methodName27;
+    private String[] _methodParameterTypes27;
+    private String _methodName28;
+    private String[] _methodParameterTypes28;
 
     public TodoLocalServiceClp(InvokableLocalService invokableLocalService) {
         _invokableLocalService = invokableLocalService;
@@ -170,9 +178,30 @@ public class TodoLocalServiceClp implements TodoLocalService {
 
         _methodParameterTypes23 = new String[] { "long" };
 
-        _methodName24 = "getUserTodosCount";
+        _methodName24 = "getUnfinishedUserTodos";
 
         _methodParameterTypes24 = new String[] { "long" };
+
+        _methodName25 = "getUnfinishedUserTodosCount";
+
+        _methodParameterTypes25 = new String[] { "long" };
+
+        _methodName26 = "getUserTodosCount";
+
+        _methodParameterTypes26 = new String[] { "long" };
+
+        _methodName27 = "addTodo";
+
+        _methodParameterTypes27 = new String[] {
+                "java.lang.String", "java.lang.String", "java.util.Date",
+                "com.liferay.portal.service.ServiceContext"
+            };
+
+        _methodName28 = "finishTodo";
+
+        _methodParameterTypes28 = new String[] {
+                "long", "com.liferay.portal.service.ServiceContext"
+            };
     }
 
     @Override
@@ -830,7 +859,8 @@ public class TodoLocalServiceClp implements TodoLocalService {
     }
 
     @Override
-    public int getUserTodosCount(long userId) {
+    public java.util.List<com.liferay.ide.projects.todo.model.Todo> getUnfinishedUserTodos(
+        long userId) {
         Object returnObj = null;
 
         try {
@@ -847,6 +877,115 @@ public class TodoLocalServiceClp implements TodoLocalService {
             }
         }
 
+        return (java.util.List<com.liferay.ide.projects.todo.model.Todo>) ClpSerializer.translateOutput(returnObj);
+    }
+
+    @Override
+    public int getUnfinishedUserTodosCount(long userId) {
+        Object returnObj = null;
+
+        try {
+            returnObj = _invokableLocalService.invokeMethod(_methodName25,
+                    _methodParameterTypes25, new Object[] { userId });
+        } catch (Throwable t) {
+            t = ClpSerializer.translateThrowable(t);
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
         return ((Integer) returnObj).intValue();
+    }
+
+    @Override
+    public int getUserTodosCount(long userId) {
+        Object returnObj = null;
+
+        try {
+            returnObj = _invokableLocalService.invokeMethod(_methodName26,
+                    _methodParameterTypes26, new Object[] { userId });
+        } catch (Throwable t) {
+            t = ClpSerializer.translateThrowable(t);
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return ((Integer) returnObj).intValue();
+    }
+
+    @Override
+    public com.liferay.ide.projects.todo.model.Todo addTodo(
+        java.lang.String name, java.lang.String description,
+        java.util.Date dueDate,
+        com.liferay.portal.service.ServiceContext serviceContext)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        Object returnObj = null;
+
+        try {
+            returnObj = _invokableLocalService.invokeMethod(_methodName27,
+                    _methodParameterTypes27,
+                    new Object[] {
+                        ClpSerializer.translateInput(name),
+                        
+                    ClpSerializer.translateInput(description),
+                        
+                    ClpSerializer.translateInput(dueDate),
+                        
+                    ClpSerializer.translateInput(serviceContext)
+                    });
+        } catch (Throwable t) {
+            t = ClpSerializer.translateThrowable(t);
+
+            if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+                throw (com.liferay.portal.kernel.exception.PortalException) t;
+            }
+
+            if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+                throw (com.liferay.portal.kernel.exception.SystemException) t;
+            }
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (com.liferay.ide.projects.todo.model.Todo) ClpSerializer.translateOutput(returnObj);
+    }
+
+    @Override
+    public void finishTodo(long todoId,
+        com.liferay.portal.service.ServiceContext context)
+        throws java.lang.Exception {
+        try {
+            _invokableLocalService.invokeMethod(_methodName28,
+                _methodParameterTypes28,
+                new Object[] { todoId, ClpSerializer.translateInput(context) });
+        } catch (Throwable t) {
+            t = ClpSerializer.translateThrowable(t);
+
+            if (t instanceof java.lang.Exception) {
+                throw (java.lang.Exception) t;
+            }
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
     }
 }

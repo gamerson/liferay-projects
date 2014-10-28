@@ -213,6 +213,10 @@ public class ClpSerializer {
             return new SystemException();
         }
 
+        if (className.equals("com.liferay.ide.projects.todo.TodoNameException")) {
+            return new com.liferay.ide.projects.todo.TodoNameException();
+        }
+
         if (className.equals(
                     "com.liferay.ide.projects.todo.NoSuchTodoException")) {
             return new com.liferay.ide.projects.todo.NoSuchTodoException();

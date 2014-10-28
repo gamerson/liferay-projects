@@ -339,8 +339,37 @@ public class TodoLocalServiceWrapper implements TodoLocalService,
     }
 
     @Override
+    public java.util.List<com.liferay.ide.projects.todo.model.Todo> getUnfinishedUserTodos(
+        long userId) {
+        return _todoLocalService.getUnfinishedUserTodos(userId);
+    }
+
+    @Override
+    public int getUnfinishedUserTodosCount(long userId) {
+        return _todoLocalService.getUnfinishedUserTodosCount(userId);
+    }
+
+    @Override
     public int getUserTodosCount(long userId) {
         return _todoLocalService.getUserTodosCount(userId);
+    }
+
+    @Override
+    public com.liferay.ide.projects.todo.model.Todo addTodo(
+        java.lang.String name, java.lang.String description,
+        java.util.Date dueDate,
+        com.liferay.portal.service.ServiceContext serviceContext)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return _todoLocalService.addTodo(name, description, dueDate,
+            serviceContext);
+    }
+
+    @Override
+    public void finishTodo(long todoId,
+        com.liferay.portal.service.ServiceContext context)
+        throws java.lang.Exception {
+        _todoLocalService.finishTodo(todoId, context);
     }
 
     /**

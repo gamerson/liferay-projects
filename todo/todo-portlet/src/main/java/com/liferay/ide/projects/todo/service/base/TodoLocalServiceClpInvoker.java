@@ -57,6 +57,14 @@ public class TodoLocalServiceClpInvoker {
     private String[] _methodParameterTypes56;
     private String _methodName57;
     private String[] _methodParameterTypes57;
+    private String _methodName58;
+    private String[] _methodParameterTypes58;
+    private String _methodName59;
+    private String[] _methodParameterTypes59;
+    private String _methodName60;
+    private String[] _methodParameterTypes60;
+    private String _methodName61;
+    private String[] _methodParameterTypes61;
 
     public TodoLocalServiceClpInvoker() {
         _methodName0 = "addTodo";
@@ -169,9 +177,30 @@ public class TodoLocalServiceClpInvoker {
 
         _methodParameterTypes56 = new String[] { "long" };
 
-        _methodName57 = "getUserTodosCount";
+        _methodName57 = "getUnfinishedUserTodos";
 
         _methodParameterTypes57 = new String[] { "long" };
+
+        _methodName58 = "getUnfinishedUserTodosCount";
+
+        _methodParameterTypes58 = new String[] { "long" };
+
+        _methodName59 = "getUserTodosCount";
+
+        _methodParameterTypes59 = new String[] { "long" };
+
+        _methodName60 = "addTodo";
+
+        _methodParameterTypes60 = new String[] {
+                "java.lang.String", "java.lang.String", "java.util.Date",
+                "com.liferay.portal.service.ServiceContext"
+            };
+
+        _methodName61 = "finishTodo";
+
+        _methodParameterTypes61 = new String[] {
+                "long", "com.liferay.portal.service.ServiceContext"
+            };
     }
 
     public Object invokeMethod(String name, String[] parameterTypes,
@@ -306,7 +335,32 @@ public class TodoLocalServiceClpInvoker {
 
         if (_methodName57.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes57, parameterTypes)) {
+            return TodoLocalServiceUtil.getUnfinishedUserTodos(((Long) arguments[0]).longValue());
+        }
+
+        if (_methodName58.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes58, parameterTypes)) {
+            return TodoLocalServiceUtil.getUnfinishedUserTodosCount(((Long) arguments[0]).longValue());
+        }
+
+        if (_methodName59.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes59, parameterTypes)) {
             return TodoLocalServiceUtil.getUserTodosCount(((Long) arguments[0]).longValue());
+        }
+
+        if (_methodName60.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes60, parameterTypes)) {
+            return TodoLocalServiceUtil.addTodo((java.lang.String) arguments[0],
+                (java.lang.String) arguments[1], (java.util.Date) arguments[2],
+                (com.liferay.portal.service.ServiceContext) arguments[3]);
+        }
+
+        if (_methodName61.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes61, parameterTypes)) {
+            TodoLocalServiceUtil.finishTodo(((Long) arguments[0]).longValue(),
+                (com.liferay.portal.service.ServiceContext) arguments[1]);
+
+            return null;
         }
 
         throw new UnsupportedOperationException();

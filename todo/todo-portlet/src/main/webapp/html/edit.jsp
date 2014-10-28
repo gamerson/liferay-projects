@@ -2,7 +2,7 @@
 <%@page import="com.liferay.ide.projects.todo.model.Todo"%>
 <%@page import="com.liferay.ide.projects.todo.service.TodoLocalServiceUtil"%>
 
-<%@ include file="/init.jsp" %>
+<%@ include file="/html/init.jsp" %>
 
 <%
 long todoId = ParamUtil.getLong(request, "todoId");
@@ -26,6 +26,22 @@ catch( NoSuchTodoException e ) {
     <aui:input name="backURL" type="hidden" value="<%= backURL %>" />
     <aui:input name="redirect" type="hidden" value="<%= redirect %>" />
     <aui:input name="todoId" type="hidden" />
+
+    <aui:fieldset>
+        <aui:input name="name">
+            <aui:validator name="required" />
+        </aui:input>
+
+        <aui:input name="description" type="textarea"  />
+
+        <aui:input label="due-date" name="dueDate" />
+
+    </aui:fieldset>
+
+    <aui:button-row>
+        <aui:button type="submit" />
+        <aui:button type="cancel" />
+    </aui:button-row>
 
 </aui:form>
 

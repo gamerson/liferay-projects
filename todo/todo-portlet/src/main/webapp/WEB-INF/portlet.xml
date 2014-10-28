@@ -3,11 +3,19 @@
 <portlet-app xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" version="2.0">
 	<portlet>
 		<portlet-name>todo</portlet-name>
-		<display-name>todo</display-name>
-		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
+		<display-name>Todo</display-name>
+		<portlet-class>com.liferay.ide.projects.todo.portlet.TodoPortlet</portlet-class>
+        <init-param>
+            <name>copy-request-parameters</name>
+            <value>true</value>
+        </init-param>
+        <init-param>
+            <name>template-path</name>
+            <value>/html/</value>
+        </init-param>
 		<init-param>
 			<name>view-template</name>
-			<value>/view.jsp</value>
+			<value>/html/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -15,8 +23,8 @@
 		</supports>
 		<resource-bundle>content.Language</resource-bundle>
 		<portlet-info>
-			<title>todo</title>
-			<short-title>todo</short-title>
+			<title>Todo</title>
+			<short-title>Todo</short-title>
 			<keywords>todo</keywords>
 		</portlet-info>
 		<security-role-ref>

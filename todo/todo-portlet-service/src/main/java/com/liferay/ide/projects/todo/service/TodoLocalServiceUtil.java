@@ -326,8 +326,32 @@ public class TodoLocalServiceUtil {
         return getService().getUserTodos(userId);
     }
 
+    public static java.util.List<com.liferay.ide.projects.todo.model.Todo> getUnfinishedUserTodos(
+        long userId) {
+        return getService().getUnfinishedUserTodos(userId);
+    }
+
+    public static int getUnfinishedUserTodosCount(long userId) {
+        return getService().getUnfinishedUserTodosCount(userId);
+    }
+
     public static int getUserTodosCount(long userId) {
         return getService().getUserTodosCount(userId);
+    }
+
+    public static com.liferay.ide.projects.todo.model.Todo addTodo(
+        java.lang.String name, java.lang.String description,
+        java.util.Date dueDate,
+        com.liferay.portal.service.ServiceContext serviceContext)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return getService().addTodo(name, description, dueDate, serviceContext);
+    }
+
+    public static void finishTodo(long todoId,
+        com.liferay.portal.service.ServiceContext context)
+        throws java.lang.Exception {
+        getService().finishTodo(todoId, context);
     }
 
     public static void clearService() {

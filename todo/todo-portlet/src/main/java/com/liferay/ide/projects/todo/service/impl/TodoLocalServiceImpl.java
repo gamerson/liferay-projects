@@ -1,11 +1,16 @@
 package com.liferay.ide.projects.todo.service.impl;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
+import com.liferay.ide.projects.todo.TodoNameException;
 import com.liferay.ide.projects.todo.model.Todo;
 import com.liferay.ide.projects.todo.service.base.TodoLocalServiceBaseImpl;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.service.ServiceContext;
 
 /**
  * The implementation of the todo local service.
@@ -28,8 +33,10 @@ public class TodoLocalServiceImpl extends TodoLocalServiceBaseImpl {
      * Never reference this interface directly. Always use {@link com.liferay.ide.projects.todo.service.TodoLocalServiceUtil} to access the todo local service.
      */
 
-    public List<Todo> getUserTodos(long userId) {
-        try {
+    public List<Todo> getUserTodos(long userId)
+    {
+        try
+        {
             return todoPersistence.findByUserId(userId);
         } catch (SystemException e) {
             e.printStackTrace();
@@ -38,13 +45,82 @@ public class TodoLocalServiceImpl extends TodoLocalServiceBaseImpl {
         return Collections.emptyList();
     }
 
-    public int getUserTodosCount(long userId) {
-        try {
-            return (int) todoPersistence.countByUserId(userId);
-        } catch (SystemException e) {
+    public List<Todo> getUnfinishedUserTodos( long userId )
+    {
+        try
+        {
+            return todoPersistence.findByF_UserId( userId, false );
+        }
+        catch( SystemException e )
+        {
+            e.printStackTrace();
+        }
+
+        return Collections.emptyList();
+    }
+
+    public int getUnfinishedUserTodosCount( long userId )
+    {
+        try
+        {
+            return (int) todoPersistence.countByF_UserId( userId, false );
+        }
+        catch( SystemException e )
+        {
             e.printStackTrace();
         }
 
         return 0;
+    }
+
+    public int getUserTodosCount(long userId)
+    {
+        try
+        {
+            return (int) todoPersistence.countByUserId(userId);
+        }
+        catch (SystemException e)
+        {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
+
+    public Todo addTodo( String name, String description, Date dueDate, ServiceContext serviceContext) throws PortalException, SystemException
+    {
+        final Date now = new Date();
+
+        validate(name);
+
+        final long todoId = counterLocalService.increment();
+
+        final Todo todo = todoPersistence.create( todoId );
+
+        todo.setUserId( serviceContext.getUserId() );
+        todo.setCreateDate( serviceContext.getCreateDate( now ) );
+        todo.setModifiedDate( serviceContext.getModifiedDate( now ) );
+        todo.setName( name );
+        todo.setDescription( description );
+        todo.setFinished( false );
+        todo.setDueDate( dueDate );
+
+        todoPersistence.update( todo );
+
+        return todo;
+    }
+
+    public void finishTodo( long todoId, ServiceContext context ) throws Exception
+    {
+        final Todo todo = fetchTodo( todoId );
+        todo.setFinished( true );
+
+        todoPersistence.update( todo );
+    }
+
+    protected void validate(String name) throws PortalException {
+        if (Validator.isNull(name)) {
+            throw new TodoNameException();
+        }
     }
 }

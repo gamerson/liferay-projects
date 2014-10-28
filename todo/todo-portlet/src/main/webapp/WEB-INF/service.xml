@@ -48,4 +48,7 @@
 		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
 		<reference package-path="com.liferay.portlet.asset" entity="AssetTag" />
 	</entity>
+    <exceptions>
+        <exception>TodoName</exception>
+    </exceptions>
 </service-builder>

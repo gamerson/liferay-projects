@@ -293,5 +293,23 @@ public interface TodoLocalService extends BaseLocalService, InvokableLocalServic
         long userId);
 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public java.util.List<com.liferay.ide.projects.todo.model.Todo> getUnfinishedUserTodos(
+        long userId);
+
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public int getUnfinishedUserTodosCount(long userId);
+
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public int getUserTodosCount(long userId);
+
+    public com.liferay.ide.projects.todo.model.Todo addTodo(
+        java.lang.String name, java.lang.String description,
+        java.util.Date dueDate,
+        com.liferay.portal.service.ServiceContext serviceContext)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException;
+
+    public void finishTodo(long todoId,
+        com.liferay.portal.service.ServiceContext context)
+        throws java.lang.Exception;
 }
