@@ -23,5 +23,6 @@
   <modules>
     <module>who-is-quiz-portlet</module>
     <module>LiferayJSDebug</module>
+    <module>todo</module>
   </modules>
 </project>

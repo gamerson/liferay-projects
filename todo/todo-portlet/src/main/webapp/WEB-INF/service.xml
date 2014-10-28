@@ -1,0 +1,51 @@
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
+
+<service-builder package-path="com.liferay.ide.projects.todo">
+	<namespace>Todos</namespace>
+	<entity name="Todo" uuid="true" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="todoId" type="long" primary="true" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="name" type="String" />
+		<column name="finished" type="boolean" />
+		<column name="dueDate" type="Date" />
+		<column name="description" type="String" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="name" />
+		</order>
+
+		<!-- Finder methods -->
+        <finder name="UserId" return-type="Collection">
+            <finder-column name="userId" />
+        </finder>
+
+        <finder name="F_UserId" return-type="Collection">
+            <finder-column name="userId" />
+            <finder-column name="finished" />
+        </finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
+		<reference package-path="com.liferay.portlet.asset" entity="AssetTag" />
+	</entity>
+</service-builder>
