@@ -2,7 +2,7 @@
 <%@page import="com.liferay.ide.projects.todo.model.Todo"%>
 <%@page import="com.liferay.ide.projects.todo.service.TodoLocalServiceUtil"%>
 
-<%@ include file="/html/init.jsp" %>
+<%@ include file="/jsp/init.jsp" %>
 
 <%
 long todoId = ParamUtil.getLong(request, "todoId");
@@ -44,5 +44,3 @@ catch( NoSuchTodoException e ) {
     </aui:button-row>
 
 </aui:form>
-
-<aui:form></aui:form>

@@ -1,6 +1,6 @@
 <%@page import="com.liferay.ide.projects.todo.model.Todo"%>
 <%@page import="com.liferay.portal.kernel.dao.search.ResultRow"%>
-<%@ include file="/html/init.jsp" %>
+<%@ include file="/jsp/init.jsp" %>
 
 <%
 ResultRow row = (ResultRow) request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);

@@ -3,7 +3,7 @@
 <portlet-app xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" version="2.0">
 	<portlet>
 		<portlet-name>todo</portlet-name>
-		<display-name>Todo</display-name>
+		<display-name>Todo with JSPs</display-name>
 		<portlet-class>com.liferay.ide.projects.todo.portlet.TodoPortlet</portlet-class>
         <init-param>
             <name>copy-request-parameters</name>
@@ -11,11 +11,11 @@
         </init-param>
         <init-param>
             <name>template-path</name>
-            <value>/html/</value>
+            <value>/jsp/</value>
         </init-param>
 		<init-param>
 			<name>view-template</name>
-			<value>/html/view.jsp</value>
+			<value>/jsp/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -23,7 +23,7 @@
 		</supports>
 		<resource-bundle>content.Language</resource-bundle>
 		<portlet-info>
-			<title>Todo</title>
+			<title>Todo with JSP</title>
 			<short-title>Todo</short-title>
 			<keywords>todo</keywords>
 		</portlet-info>
