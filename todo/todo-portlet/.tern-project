@@ -1,1 +1,1 @@
-{"plugins":{"aui":{},"liferay":{},"yui":{}},"libs":["ecma5","browser"],"ide":{"scriptPaths":[]}}
+{"ide":{"scriptPaths":[]},"plugins":{"angular":{},"aui":{},"liferay":{},"yui":{}},"libs":["browser","ecma5"]}

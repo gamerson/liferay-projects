@@ -39,9 +39,9 @@ int buildNumber = ReleaseLocalServiceUtil.getRelease( 1 ).getBuildNumber();
       <liferay-ui:search-iterator />
     </liferay-ui:search-container>
 
-   <liferay-ui:message key="liferay-version" />: <%= buildNumber %> |
-   <liferay-ui:message key="company-id" />: <%= themeDisplay.getCompanyId() %> |
-   <liferay-ui:message key="user-name" />: <%= themeDisplay.getUser().getScreenName() %>
+   <liferay-ui:message key="liferay-version" /> : <%= buildNumber %> |
+   <liferay-ui:message key="company-id" /> : <%= themeDisplay.getCompanyId() %> |
+   <liferay-ui:message key="user-name" /> : <%= themeDisplay.getUser().getFullName() %>
 </c:if>
 <c:if test="<%=!themeDisplay.isSignedIn()%>">
     <a href="<%= themeDisplay.getURLSignIn() %>">
