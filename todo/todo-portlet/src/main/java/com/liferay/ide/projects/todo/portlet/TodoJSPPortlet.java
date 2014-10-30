@@ -13,7 +13,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
-public class TodoPortlet extends MVCPortlet
+public class TodoJSPPortlet extends MVCPortlet
 {
 
     public void updateTodo( ActionRequest actionRequest, ActionResponse actionResponse ) throws Exception

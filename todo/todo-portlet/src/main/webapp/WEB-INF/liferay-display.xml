@@ -3,6 +3,7 @@
 
 <display>
 	<category name="category.sample">
-		<portlet id="todo" />
+	    <portlet id="todo-jsp" />
+	    <portlet id="todo-angularjs"></portlet>
 	</category>
 </display>
