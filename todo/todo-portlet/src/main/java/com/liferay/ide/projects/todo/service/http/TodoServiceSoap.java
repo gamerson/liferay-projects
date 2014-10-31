@@ -1,5 +1,12 @@
 package com.liferay.ide.projects.todo.service.http;
 
+import com.liferay.ide.projects.todo.service.TodoServiceUtil;
+
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import java.rmi.RemoteException;
+
 /**
  * Provides the SOAP utility for the
  * {@link com.liferay.ide.projects.todo.service.TodoServiceUtil} service utility. The
@@ -41,4 +48,29 @@ package com.liferay.ide.projects.todo.service.http;
  * @generated
  */
 public class TodoServiceSoap {
+    private static Log _log = LogFactoryUtil.getLog(TodoServiceSoap.class);
+
+    public static com.liferay.ide.projects.todo.model.TodoSoap[] getUnfinishedUserTodos(
+        long userId) throws RemoteException {
+        try {
+            java.util.List<com.liferay.ide.projects.todo.model.Todo> returnValue =
+                TodoServiceUtil.getUnfinishedUserTodos(userId);
+
+            return com.liferay.ide.projects.todo.model.TodoSoap.toSoapModels(returnValue);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static void finishTodo(long todoId) throws RemoteException {
+        try {
+            TodoServiceUtil.finishTodo(todoId);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
 }

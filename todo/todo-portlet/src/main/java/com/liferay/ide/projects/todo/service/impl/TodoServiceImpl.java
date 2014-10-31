@@ -1,5 +1,9 @@
 package com.liferay.ide.projects.todo.service.impl;
 
+import java.util.List;
+
+import com.liferay.ide.projects.todo.model.Todo;
+import com.liferay.ide.projects.todo.service.TodoLocalServiceUtil;
 import com.liferay.ide.projects.todo.service.base.TodoServiceBaseImpl;
 
 /**
@@ -22,4 +26,21 @@ public class TodoServiceImpl extends TodoServiceBaseImpl {
      *
      * Never reference this interface directly. Always use {@link com.liferay.ide.projects.todo.service.TodoServiceUtil} to access the todo remote service.
      */
+
+    public List<Todo> getUnfinishedUserTodos( long userId )
+    {
+        return TodoLocalServiceUtil.getUnfinishedUserTodos( userId );
+    }
+
+    public void finishTodo( long todoId )
+    {
+        try
+        {
+            TodoLocalServiceUtil.finishTodo( todoId );
+        }
+        catch( Exception e )
+        {
+            e.printStackTrace();
+        }
+    }
 }

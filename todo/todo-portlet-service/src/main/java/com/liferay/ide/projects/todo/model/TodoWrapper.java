@@ -485,7 +485,7 @@ public class TodoWrapper implements Todo, ModelWrapper<Todo> {
     }
 
     @Override
-    public int compareTo(Todo todo) {
+    public int compareTo(com.liferay.ide.projects.todo.model.Todo todo) {
         return _todo.compareTo(todo);
     }
 
@@ -495,17 +495,17 @@ public class TodoWrapper implements Todo, ModelWrapper<Todo> {
     }
 
     @Override
-    public com.liferay.portal.model.CacheModel<Todo> toCacheModel() {
+    public com.liferay.portal.model.CacheModel<com.liferay.ide.projects.todo.model.Todo> toCacheModel() {
         return _todo.toCacheModel();
     }
 
     @Override
-    public Todo toEscapedModel() {
+    public com.liferay.ide.projects.todo.model.Todo toEscapedModel() {
         return new TodoWrapper(_todo.toEscapedModel());
     }
 
     @Override
-    public Todo toUnescapedModel() {
+    public com.liferay.ide.projects.todo.model.Todo toUnescapedModel() {
         return new TodoWrapper(_todo.toUnescapedModel());
     }
 

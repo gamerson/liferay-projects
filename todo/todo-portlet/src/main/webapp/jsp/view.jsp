@@ -6,16 +6,12 @@
 int buildNumber = ReleaseLocalServiceUtil.getRelease( 1 ).getBuildNumber();
 %>
 <c:if test="<%=themeDisplay.isSignedIn()%>">
-    <aui:nav-bar>
-        <aui:nav>
-            <portlet:renderURL var="addTodoURL">
-                <portlet:param name="mvcPath" value="/html/edit.jsp" />
-                <portlet:param name="redirect" value="<%= currentURL %>" />
-            </portlet:renderURL>
+    <portlet:renderURL var="addTodoURL">
+        <portlet:param name="mvcPath" value="/jsp/edit.jsp" />
+        <portlet:param name="redirect" value="<%= currentURL %>" />
+    </portlet:renderURL>
 
-            <aui:nav-item href="<%= addTodoURL %>" label="add" iconCssClass="icon-plus" />
-        </aui:nav>
-    </aui:nav-bar>
+    <aui:button href="<%= addTodoURL %>" cssClass="btn-primary" value="add-todo"/>
 
     <liferay-ui:search-container
         emptyResultsMessage="there-are-no-todos"

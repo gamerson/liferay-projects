@@ -348,10 +348,8 @@ public class TodoLocalServiceUtil {
         return getService().addTodo(name, description, dueDate, serviceContext);
     }
 
-    public static void finishTodo(long todoId,
-        com.liferay.portal.service.ServiceContext context)
-        throws java.lang.Exception {
-        getService().finishTodo(todoId, context);
+    public static void finishTodo(long todoId) throws java.lang.Exception {
+        getService().finishTodo(todoId);
     }
 
     public static void clearService() {

@@ -44,6 +44,17 @@ public class TodoServiceWrapper implements TodoService,
         return _todoService.invokeMethod(name, parameterTypes, arguments);
     }
 
+    @Override
+    public java.util.List<com.liferay.ide.projects.todo.model.Todo> getUnfinishedUserTodos(
+        long userId) {
+        return _todoService.getUnfinishedUserTodos(userId);
+    }
+
+    @Override
+    public void finishTodo(long todoId) {
+        _todoService.finishTodo(todoId);
+    }
+
     /**
      * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
      */

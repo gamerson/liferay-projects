@@ -51,6 +51,15 @@ public class TodoServiceUtil {
         return getService().invokeMethod(name, parameterTypes, arguments);
     }
 
+    public static java.util.List<com.liferay.ide.projects.todo.model.Todo> getUnfinishedUserTodos(
+        long userId) {
+        return getService().getUnfinishedUserTodos(userId);
+    }
+
+    public static void finishTodo(long todoId) {
+        getService().finishTodo(todoId);
+    }
+
     public static void clearService() {
         _service = null;
     }

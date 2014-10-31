@@ -2,20 +2,32 @@
     Liferay.bootstrap = function(id, portletId) {
         var module = angular.module(id, ["todoServices"]);
 
-        module.controller("MainCtrl", ['$scope', 'todo',
-            function($scope, todo) {
+        module.controller("MainCtrl", ['$scope', 'releaseFactory', 'todoFactory',
+            function($scope, releaseFactory, todoFactory) {
                 $scope.id = id;
                 $scope.portletId = portletId.substr(1, portletId.length - 2);
 
                 $scope.model = {
                     companyId: Liferay.ThemeDisplay.getCompanyId(),
                     isSignedIn: Liferay.ThemeDisplay.isSignedIn(),
-                    userName: Liferay.ThemeDisplay.getUserName()
+                    userName: Liferay.ThemeDisplay.getUserName(),
+                    userId: Liferay.ThemeDisplay.getUserId()
                 }
 
-                todo.getRelease($scope.portletId).then(function(release) {
+                releaseFactory.getRelease($scope.portletId).then(function(release) {
                     $scope.model.release = release;
                 });
+
+                todoFactory.getUnfinishedTodos($scope.model.userId).then(function(data) {
+                    console.log(data);
+                    $scope.model.todos = data;
+                });
+
+                $scope.finish = function(todo) {
+                    todoFactory.finishTodo(todo).then(function(result){
+                        Liferay.fire('reloadTodos', { portletId: $scope.portletId });
+                    });
+                }
             }
         ]);
 

@@ -110,7 +110,7 @@ public class TodoLocalServiceImpl extends TodoLocalServiceBaseImpl {
         return todo;
     }
 
-    public void finishTodo( long todoId, ServiceContext context ) throws Exception
+    public void finishTodo( long todoId ) throws Exception
     {
         final Todo todo = fetchTodo( todoId );
         todo.setFinished( true );

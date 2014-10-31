@@ -199,9 +199,7 @@ public class TodoLocalServiceClp implements TodoLocalService {
 
         _methodName28 = "finishTodo";
 
-        _methodParameterTypes28 = new String[] {
-                "long", "com.liferay.portal.service.ServiceContext"
-            };
+        _methodParameterTypes28 = new String[] { "long" };
     }
 
     @Override
@@ -966,13 +964,10 @@ public class TodoLocalServiceClp implements TodoLocalService {
     }
 
     @Override
-    public void finishTodo(long todoId,
-        com.liferay.portal.service.ServiceContext context)
-        throws java.lang.Exception {
+    public void finishTodo(long todoId) throws java.lang.Exception {
         try {
             _invokableLocalService.invokeMethod(_methodName28,
-                _methodParameterTypes28,
-                new Object[] { todoId, ClpSerializer.translateInput(context) });
+                _methodParameterTypes28, new Object[] { todoId });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 

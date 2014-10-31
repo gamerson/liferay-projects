@@ -46,11 +46,10 @@ public class TodoJSPPortlet extends MVCPortlet
     public void finishTodo(ActionRequest actionRequest, ActionResponse actionResponse) throws Exception
     {
         final long todoId = ParamUtil.getLong( actionRequest, "todoId" );
-        final ServiceContext serviceContext = ServiceContextFactory.getInstance( actionRequest );
 
         try
         {
-            TodoLocalServiceUtil.finishTodo( todoId, serviceContext );
+            TodoLocalServiceUtil.finishTodo( todoId );
         }
         catch( Exception e )
         {

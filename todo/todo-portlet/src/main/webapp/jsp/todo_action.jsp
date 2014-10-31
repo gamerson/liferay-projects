@@ -9,7 +9,7 @@ Todo todo = (Todo) row.getObject();
 
 <liferay-ui:icon-menu>
     <portlet:renderURL var="editURL">
-        <portlet:param name="mvcPath" value="/html/edit.jsp" />
+        <portlet:param name="mvcPath" value="/jsp/edit.jsp" />
         <portlet:param name="todoId" value="<%= String.valueOf(todo.getTodoId()) %>" />
         <portlet:param name="redirect" value="<%= currentURL %>" />
     </portlet:renderURL>

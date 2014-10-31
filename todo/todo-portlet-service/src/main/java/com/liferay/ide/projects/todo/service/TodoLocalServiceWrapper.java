@@ -366,10 +366,8 @@ public class TodoLocalServiceWrapper implements TodoLocalService,
     }
 
     @Override
-    public void finishTodo(long todoId,
-        com.liferay.portal.service.ServiceContext context)
-        throws java.lang.Exception {
-        _todoLocalService.finishTodo(todoId, context);
+    public void finishTodo(long todoId) throws java.lang.Exception {
+        _todoLocalService.finishTodo(todoId);
     }
 
     /**
