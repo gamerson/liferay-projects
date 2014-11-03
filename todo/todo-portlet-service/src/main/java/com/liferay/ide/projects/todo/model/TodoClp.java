@@ -6,6 +6,7 @@ import com.liferay.ide.projects.todo.service.TodoLocalServiceUtil;
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.lar.StagedModelType;
+import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.BaseModel;
@@ -537,7 +538,9 @@ public class TodoClp extends BaseModelImpl<Todo> implements Todo {
     public int compareTo(Todo todo) {
         int value = 0;
 
-        value = getName().compareTo(todo.getName());
+        value = DateUtil.compareTo(getDueDate(), todo.getDueDate());
+
+        value = value * -1;
 
         if (value != 0) {
             return value;

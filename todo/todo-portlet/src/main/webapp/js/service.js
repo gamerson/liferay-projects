@@ -1,7 +1,19 @@
 'use strict';
 
-angular.module("todoServices", [])
-.factory('releaseFactory', function($q, $http) {
+angular.module("todoServices", []).
+factory('urlFactory', function() {
+    return {
+        create: function(pid, name) {
+            var resourceURL = Liferay.PortletURL.createRenderURL();
+            resourceURL.setPortletId(pid);
+            resourceURL.setPortletMode('view');
+            resourceURL.setWindowState('exclusive');
+            resourceURL.setParameter('jspPage', '/angularjs/' + name + '.jsp');
+            return resourceURL.toString();
+        }
+    };
+}).
+factory('releaseFactory', function($q, $http) {
     var getRelease = function(pid) {
         var defer = $q.defer();
         var url = Liferay.PortletURL.createResourceURL();
@@ -21,6 +33,29 @@ angular.module("todoServices", [])
     };
 })
 .factory('todoFactory', function($q, $http) {
+    var addTodo = function(todo, userId) {
+        var defer = $q.defer();
+
+        console.log(userId);
+        Liferay.Service(
+                '/todo-portlet.todo/add-todo',
+                {
+                  name: todo.name,
+                  description: todo.description,
+                  dueDate: todo.dueDate,
+                  serviceContext:  {
+                      userId: userId
+                  }
+                },
+                function(obj) {
+                    console.log(obj);
+                    defer.resolve(obj);
+                }
+              );
+
+        return defer.promise;
+    };
+
     var getUnfinishedTodos = function (id) {
         var defer = $q.defer();
 
@@ -39,7 +74,6 @@ angular.module("todoServices", [])
 
     var finishTodo = function(todo) {
         var defer = $q.defer();
-        console.log(todo.todoId);
         Liferay.Service(
             '/todo-portlet.todo/finish-todo',
             {
@@ -54,6 +88,7 @@ angular.module("todoServices", [])
     }
 
     return {
+        addTodo: addTodo,
         getUnfinishedTodos: getUnfinishedTodos,
         finishTodo: finishTodo
     };

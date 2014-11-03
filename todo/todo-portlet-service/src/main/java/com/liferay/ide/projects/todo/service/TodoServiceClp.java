@@ -16,6 +16,8 @@ public class TodoServiceClp implements TodoService {
     private String[] _methodParameterTypes3;
     private String _methodName4;
     private String[] _methodParameterTypes4;
+    private String _methodName5;
+    private String[] _methodParameterTypes5;
 
     public TodoServiceClp(InvokableService invokableService) {
         _invokableService = invokableService;
@@ -28,13 +30,20 @@ public class TodoServiceClp implements TodoService {
 
         _methodParameterTypes1 = new String[] { "java.lang.String" };
 
-        _methodName3 = "getUnfinishedUserTodos";
+        _methodName3 = "addTodo";
 
-        _methodParameterTypes3 = new String[] { "long" };
+        _methodParameterTypes3 = new String[] {
+                "java.lang.String", "java.lang.String", "java.util.Date",
+                "com.liferay.portal.service.ServiceContext"
+            };
 
-        _methodName4 = "finishTodo";
+        _methodName4 = "getUnfinishedUserTodos";
 
         _methodParameterTypes4 = new String[] { "long" };
+
+        _methodName5 = "finishTodo";
+
+        _methodParameterTypes5 = new String[] { "long" };
     }
 
     @Override
@@ -84,13 +93,41 @@ public class TodoServiceClp implements TodoService {
     }
 
     @Override
+    public void addTodo(java.lang.String name, java.lang.String description,
+        java.util.Date dueDate,
+        com.liferay.portal.service.ServiceContext serviceContext) {
+        try {
+            _invokableService.invokeMethod(_methodName3,
+                _methodParameterTypes3,
+                new Object[] {
+                    ClpSerializer.translateInput(name),
+                    
+                ClpSerializer.translateInput(description),
+                    
+                ClpSerializer.translateInput(dueDate),
+                    
+                ClpSerializer.translateInput(serviceContext)
+                });
+        } catch (Throwable t) {
+            t = ClpSerializer.translateThrowable(t);
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+    }
+
+    @Override
     public java.util.List<com.liferay.ide.projects.todo.model.Todo> getUnfinishedUserTodos(
         long userId) {
         Object returnObj = null;
 
         try {
-            returnObj = _invokableService.invokeMethod(_methodName3,
-                    _methodParameterTypes3, new Object[] { userId });
+            returnObj = _invokableService.invokeMethod(_methodName4,
+                    _methodParameterTypes4, new Object[] { userId });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 
@@ -108,8 +145,8 @@ public class TodoServiceClp implements TodoService {
     @Override
     public void finishTodo(long todoId) {
         try {
-            _invokableService.invokeMethod(_methodName4,
-                _methodParameterTypes4, new Object[] { todoId });
+            _invokableService.invokeMethod(_methodName5,
+                _methodParameterTypes5, new Object[] { todoId });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 

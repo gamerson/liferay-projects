@@ -8,6 +8,7 @@ import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.lar.StagedModelType;
+import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -67,8 +68,8 @@ public class TodoModelImpl extends BaseModelImpl<Todo> implements TodoModel {
         };
     public static final String TABLE_SQL_CREATE = "create table Todos_Todo (uuid_ VARCHAR(75) null,todoId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,finished BOOLEAN,dueDate DATE null,description VARCHAR(75) null)";
     public static final String TABLE_SQL_DROP = "drop table Todos_Todo";
-    public static final String ORDER_BY_JPQL = " ORDER BY todo.name ASC";
-    public static final String ORDER_BY_SQL = " ORDER BY Todos_Todo.name ASC";
+    public static final String ORDER_BY_JPQL = " ORDER BY todo.dueDate DESC";
+    public static final String ORDER_BY_SQL = " ORDER BY Todos_Todo.dueDate DESC";
     public static final String DATA_SOURCE = "liferayDataSource";
     public static final String SESSION_FACTORY = "liferaySessionFactory";
     public static final String TX_MANAGER = "liferayTransactionManager";
@@ -86,7 +87,7 @@ public class TodoModelImpl extends BaseModelImpl<Todo> implements TodoModel {
     public static long GROUPID_COLUMN_BITMASK = 4L;
     public static long USERID_COLUMN_BITMASK = 8L;
     public static long UUID_COLUMN_BITMASK = 16L;
-    public static long NAME_COLUMN_BITMASK = 32L;
+    public static long DUEDATE_COLUMN_BITMASK = 32L;
     public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
                 "lock.expiration.time.com.liferay.ide.projects.todo.model.Todo"));
     private static ClassLoader _classLoader = Todo.class.getClassLoader();
@@ -455,8 +456,6 @@ public class TodoModelImpl extends BaseModelImpl<Todo> implements TodoModel {
 
     @Override
     public void setName(String name) {
-        _columnBitmask = -1L;
-
         _name = name;
     }
 
@@ -496,6 +495,8 @@ public class TodoModelImpl extends BaseModelImpl<Todo> implements TodoModel {
 
     @Override
     public void setDueDate(Date dueDate) {
+        _columnBitmask = -1L;
+
         _dueDate = dueDate;
     }
 
@@ -573,7 +574,9 @@ public class TodoModelImpl extends BaseModelImpl<Todo> implements TodoModel {
     public int compareTo(Todo todo) {
         int value = 0;
 
-        value = getName().compareTo(todo.getName());
+        value = DateUtil.compareTo(getDueDate(), todo.getDueDate());
+
+        value = value * -1;
 
         if (value != 0) {
             return value;

@@ -50,6 +50,19 @@ import java.rmi.RemoteException;
 public class TodoServiceSoap {
     private static Log _log = LogFactoryUtil.getLog(TodoServiceSoap.class);
 
+    public static void addTodo(java.lang.String name,
+        java.lang.String description, java.util.Date dueDate,
+        com.liferay.portal.service.ServiceContext serviceContext)
+        throws RemoteException {
+        try {
+            TodoServiceUtil.addTodo(name, description, dueDate, serviceContext);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
     public static com.liferay.ide.projects.todo.model.TodoSoap[] getUnfinishedUserTodos(
         long userId) throws RemoteException {
         try {

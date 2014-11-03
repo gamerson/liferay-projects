@@ -2,34 +2,35 @@
 <!DOCTYPE liferay-portlet-app PUBLIC "-//Liferay//DTD Portlet Application 6.2.0//EN" "http://www.liferay.com/dtd/liferay-portlet-app_6_2_0.dtd">
 
 <liferay-portlet-app>
-	<portlet>
-		<portlet-name>todo-jsp</portlet-name>
-		<icon>/icon.png</icon>
-	</portlet>
-	<portlet>
-	    <portlet-name>todo-angularjs</portlet-name>
-	    <icon>/icon.png</icon>
+    <portlet>
+        <portlet-name>todo-jsp</portlet-name>
+        <icon>/icon.png</icon>
+    </portlet>
+    <portlet>
+        <portlet-name>todo-angularjs</portlet-name>
+        <icon>/icon.png</icon>
         <instanceable>true</instanceable>
         <ajaxable>false</ajaxable>
         <footer-portlet-css>/css/main.css</footer-portlet-css>
         <footer-portal-javascript>/todo-portlet/js/angular.js</footer-portal-javascript>
-	    <footer-portlet-javascript>/js/service.js</footer-portlet-javascript>
-	    <footer-portlet-javascript>/js/main.js</footer-portlet-javascript>
-	</portlet>
-	<role-mapper>
-		<role-name>administrator</role-name>
-		<role-link>Administrator</role-link>
-	</role-mapper>
-	<role-mapper>
-		<role-name>guest</role-name>
-		<role-link>Guest</role-link>
-	</role-mapper>
-	<role-mapper>
-		<role-name>power-user</role-name>
-		<role-link>Power User</role-link>
-	</role-mapper>
-	<role-mapper>
-		<role-name>user</role-name>
-		<role-link>User</role-link>
-	</role-mapper>
+        <footer-portal-javascript>/todo-portlet/js/angular-relative-date.min.js</footer-portal-javascript>
+        <footer-portlet-javascript>/js/service.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/js/main.js</footer-portlet-javascript>
+    </portlet>
+    <role-mapper>
+        <role-name>administrator</role-name>
+        <role-link>Administrator</role-link>
+    </role-mapper>
+    <role-mapper>
+        <role-name>guest</role-name>
+        <role-link>Guest</role-link>
+    </role-mapper>
+    <role-mapper>
+        <role-name>power-user</role-name>
+        <role-link>Power User</role-link>
+    </role-mapper>
+    <role-mapper>
+        <role-name>user</role-name>
+        <role-link>User</role-link>
+    </role-mapper>
 </liferay-portlet-app>

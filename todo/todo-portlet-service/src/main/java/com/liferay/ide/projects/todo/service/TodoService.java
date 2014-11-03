@@ -52,6 +52,10 @@ public interface TodoService extends BaseService, InvokableService {
         java.lang.String[] parameterTypes, java.lang.Object[] arguments)
         throws java.lang.Throwable;
 
+    public void addTodo(java.lang.String name, java.lang.String description,
+        java.util.Date dueDate,
+        com.liferay.portal.service.ServiceContext serviceContext);
+
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public java.util.List<com.liferay.ide.projects.todo.model.Todo> getUnfinishedUserTodos(
         long userId);

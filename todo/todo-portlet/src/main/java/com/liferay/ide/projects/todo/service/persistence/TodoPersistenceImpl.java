@@ -87,7 +87,7 @@ public class TodoPersistenceImpl extends BasePersistenceImpl<Todo>
             FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByUuid",
             new String[] { String.class.getName() },
             TodoModelImpl.UUID_COLUMN_BITMASK |
-            TodoModelImpl.NAME_COLUMN_BITMASK);
+            TodoModelImpl.DUEDATE_COLUMN_BITMASK);
     public static final FinderPath FINDER_PATH_COUNT_BY_UUID = new FinderPath(TodoModelImpl.ENTITY_CACHE_ENABLED,
             TodoModelImpl.FINDER_CACHE_ENABLED, Long.class,
             FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByUuid",
@@ -125,7 +125,7 @@ public class TodoPersistenceImpl extends BasePersistenceImpl<Todo>
             new String[] { String.class.getName(), Long.class.getName() },
             TodoModelImpl.UUID_COLUMN_BITMASK |
             TodoModelImpl.COMPANYID_COLUMN_BITMASK |
-            TodoModelImpl.NAME_COLUMN_BITMASK);
+            TodoModelImpl.DUEDATE_COLUMN_BITMASK);
     public static final FinderPath FINDER_PATH_COUNT_BY_UUID_C = new FinderPath(TodoModelImpl.ENTITY_CACHE_ENABLED,
             TodoModelImpl.FINDER_CACHE_ENABLED, Long.class,
             FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByUuid_C",
@@ -149,7 +149,7 @@ public class TodoPersistenceImpl extends BasePersistenceImpl<Todo>
             FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByUserId",
             new String[] { Long.class.getName() },
             TodoModelImpl.USERID_COLUMN_BITMASK |
-            TodoModelImpl.NAME_COLUMN_BITMASK);
+            TodoModelImpl.DUEDATE_COLUMN_BITMASK);
     public static final FinderPath FINDER_PATH_COUNT_BY_USERID = new FinderPath(TodoModelImpl.ENTITY_CACHE_ENABLED,
             TodoModelImpl.FINDER_CACHE_ENABLED, Long.class,
             FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByUserId",
@@ -171,7 +171,7 @@ public class TodoPersistenceImpl extends BasePersistenceImpl<Todo>
             new String[] { Long.class.getName(), Boolean.class.getName() },
             TodoModelImpl.USERID_COLUMN_BITMASK |
             TodoModelImpl.FINISHED_COLUMN_BITMASK |
-            TodoModelImpl.NAME_COLUMN_BITMASK);
+            TodoModelImpl.DUEDATE_COLUMN_BITMASK);
     public static final FinderPath FINDER_PATH_COUNT_BY_F_USERID = new FinderPath(TodoModelImpl.ENTITY_CACHE_ENABLED,
             TodoModelImpl.FINDER_CACHE_ENABLED, Long.class,
             FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByF_UserId",

@@ -45,6 +45,13 @@ public class TodoServiceWrapper implements TodoService,
     }
 
     @Override
+    public void addTodo(java.lang.String name, java.lang.String description,
+        java.util.Date dueDate,
+        com.liferay.portal.service.ServiceContext serviceContext) {
+        _todoService.addTodo(name, description, dueDate, serviceContext);
+    }
+
+    @Override
     public java.util.List<com.liferay.ide.projects.todo.model.Todo> getUnfinishedUserTodos(
         long userId) {
         return _todoService.getUnfinishedUserTodos(userId);
