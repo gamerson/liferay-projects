@@ -348,6 +348,16 @@ public class TodoLocalServiceUtil {
         return getService().addTodo(name, description, dueDate, serviceContext);
     }
 
+    public static com.liferay.ide.projects.todo.model.Todo addNewTodo(
+        java.lang.String name, java.lang.String description,
+        java.util.Date dueDate,
+        com.liferay.portal.service.ServiceContext serviceContext)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return getService()
+                   .addNewTodo(name, description, dueDate, serviceContext);
+    }
+
     public static void finishTodo(long todoId) throws java.lang.Exception {
         getService().finishTodo(todoId);
     }

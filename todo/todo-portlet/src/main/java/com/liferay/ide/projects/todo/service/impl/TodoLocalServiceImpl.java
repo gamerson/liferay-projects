@@ -109,6 +109,28 @@ public class TodoLocalServiceImpl extends TodoLocalServiceBaseImpl {
 
         return todo;
     }
+    public Todo addNewTodo( String name, String description, Date dueDate, ServiceContext serviceContext) throws PortalException, SystemException
+    {
+        final Date now = new Date();
+
+        validate(name);
+
+        final long todoId = counterLocalService.increment();
+
+        final Todo todo = todoPersistence.create( todoId );
+
+        todo.setUserId( serviceContext.getUserId() );
+        todo.setCreateDate( serviceContext.getCreateDate( now ) );
+        todo.setModifiedDate( serviceContext.getModifiedDate( now ) );
+        todo.setName( name );
+        todo.setDescription( description );
+        todo.setFinished( false );
+        todo.setDueDate( dueDate );
+
+        todoPersistence.update( todo );
+
+        return todo;
+    }
 
     public void finishTodo( long todoId ) throws Exception
     {

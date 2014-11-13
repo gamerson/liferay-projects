@@ -65,6 +65,8 @@ public class TodoLocalServiceClpInvoker {
     private String[] _methodParameterTypes60;
     private String _methodName61;
     private String[] _methodParameterTypes61;
+    private String _methodName62;
+    private String[] _methodParameterTypes62;
 
     public TodoLocalServiceClpInvoker() {
         _methodName0 = "addTodo";
@@ -196,9 +198,16 @@ public class TodoLocalServiceClpInvoker {
                 "com.liferay.portal.service.ServiceContext"
             };
 
-        _methodName61 = "finishTodo";
+        _methodName61 = "addNewTodo";
 
-        _methodParameterTypes61 = new String[] { "long" };
+        _methodParameterTypes61 = new String[] {
+                "java.lang.String", "java.lang.String", "java.util.Date",
+                "com.liferay.portal.service.ServiceContext"
+            };
+
+        _methodName62 = "finishTodo";
+
+        _methodParameterTypes62 = new String[] { "long" };
     }
 
     public Object invokeMethod(String name, String[] parameterTypes,
@@ -355,6 +364,13 @@ public class TodoLocalServiceClpInvoker {
 
         if (_methodName61.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes61, parameterTypes)) {
+            return TodoLocalServiceUtil.addNewTodo((java.lang.String) arguments[0],
+                (java.lang.String) arguments[1], (java.util.Date) arguments[2],
+                (com.liferay.portal.service.ServiceContext) arguments[3]);
+        }
+
+        if (_methodName62.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes62, parameterTypes)) {
             TodoLocalServiceUtil.finishTodo(((Long) arguments[0]).longValue());
 
             return null;

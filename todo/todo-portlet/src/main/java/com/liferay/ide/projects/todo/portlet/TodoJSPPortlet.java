@@ -8,6 +8,8 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 
 import com.liferay.ide.projects.todo.service.TodoLocalServiceUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
@@ -57,6 +59,17 @@ public class TodoJSPPortlet extends MVCPortlet
         }
 
         sendRedirect( actionRequest, actionResponse );
+    }
+
+    public void addTodo(ActionRequest actionRequest, ActionResponse actionResponse) throws PortalException, SystemException {
+        String name = ParamUtil.getString( actionRequest, "name" );
+        String description = ParamUtil.getString( actionRequest, "description" );
+        Date dueDate = ParamUtil.getDate( actionRequest, "dueDate", new SimpleDateFormat() );
+
+
+
+        TodoLocalServiceUtil.addTodo( name, description, dueDate, ServiceContextFactory.getInstance( actionRequest ) );
+        TodoLocalServiceUtil.addNewTodo( name, description, dueDate, ServiceContextFactory.getInstance( actionRequest ) );
     }
 
 }

@@ -366,6 +366,17 @@ public class TodoLocalServiceWrapper implements TodoLocalService,
     }
 
     @Override
+    public com.liferay.ide.projects.todo.model.Todo addNewTodo(
+        java.lang.String name, java.lang.String description,
+        java.util.Date dueDate,
+        com.liferay.portal.service.ServiceContext serviceContext)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return _todoLocalService.addNewTodo(name, description, dueDate,
+            serviceContext);
+    }
+
+    @Override
     public void finishTodo(long todoId) throws java.lang.Exception {
         _todoLocalService.finishTodo(todoId);
     }

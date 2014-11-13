@@ -64,6 +64,8 @@ public class TodoLocalServiceClp implements TodoLocalService {
     private String[] _methodParameterTypes27;
     private String _methodName28;
     private String[] _methodParameterTypes28;
+    private String _methodName29;
+    private String[] _methodParameterTypes29;
 
     public TodoLocalServiceClp(InvokableLocalService invokableLocalService) {
         _invokableLocalService = invokableLocalService;
@@ -197,9 +199,16 @@ public class TodoLocalServiceClp implements TodoLocalService {
                 "com.liferay.portal.service.ServiceContext"
             };
 
-        _methodName28 = "finishTodo";
+        _methodName28 = "addNewTodo";
 
-        _methodParameterTypes28 = new String[] { "long" };
+        _methodParameterTypes28 = new String[] {
+                "java.lang.String", "java.lang.String", "java.util.Date",
+                "com.liferay.portal.service.ServiceContext"
+            };
+
+        _methodName29 = "finishTodo";
+
+        _methodParameterTypes29 = new String[] { "long" };
     }
 
     @Override
@@ -964,10 +973,53 @@ public class TodoLocalServiceClp implements TodoLocalService {
     }
 
     @Override
+    public com.liferay.ide.projects.todo.model.Todo addNewTodo(
+        java.lang.String name, java.lang.String description,
+        java.util.Date dueDate,
+        com.liferay.portal.service.ServiceContext serviceContext)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        Object returnObj = null;
+
+        try {
+            returnObj = _invokableLocalService.invokeMethod(_methodName28,
+                    _methodParameterTypes28,
+                    new Object[] {
+                        ClpSerializer.translateInput(name),
+                        
+                    ClpSerializer.translateInput(description),
+                        
+                    ClpSerializer.translateInput(dueDate),
+                        
+                    ClpSerializer.translateInput(serviceContext)
+                    });
+        } catch (Throwable t) {
+            t = ClpSerializer.translateThrowable(t);
+
+            if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+                throw (com.liferay.portal.kernel.exception.PortalException) t;
+            }
+
+            if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+                throw (com.liferay.portal.kernel.exception.SystemException) t;
+            }
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (com.liferay.ide.projects.todo.model.Todo) ClpSerializer.translateOutput(returnObj);
+    }
+
+    @Override
     public void finishTodo(long todoId) throws java.lang.Exception {
         try {
-            _invokableLocalService.invokeMethod(_methodName28,
-                _methodParameterTypes28, new Object[] { todoId });
+            _invokableLocalService.invokeMethod(_methodName29,
+                _methodParameterTypes29, new Object[] { todoId });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 

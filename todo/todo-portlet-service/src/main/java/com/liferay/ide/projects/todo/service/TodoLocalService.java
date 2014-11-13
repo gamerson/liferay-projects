@@ -309,5 +309,12 @@ public interface TodoLocalService extends BaseLocalService, InvokableLocalServic
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException;
 
+    public com.liferay.ide.projects.todo.model.Todo addNewTodo(
+        java.lang.String name, java.lang.String description,
+        java.util.Date dueDate,
+        com.liferay.portal.service.ServiceContext serviceContext)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException;
+
     public void finishTodo(long todoId) throws java.lang.Exception;
 }
