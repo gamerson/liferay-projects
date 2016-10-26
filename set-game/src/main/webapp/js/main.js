@@ -45,6 +45,11 @@ function startGame(host, panelId, imagesBaseUrl, invite, startUserId, inviteUser
             var set2 = JSON.parse(data[3]);
 
             showSet(set0,set1,set2);
+            
+            shape_a[set[0].shape-1][set[0].color-1][set[0].fill-1][set[0].number-1]=1;
+            shape_a[set[1].shape-1][set[1].color-1][set[1].fill-1][set[1].number-1]=1;
+            shape_a[set[2].shape-1][set[2].color-1][set[2].fill-1][set[2].number-1]=1;
+            
             alert('other player found a set');
 
             AUI().use('aui-node', function(A) {
