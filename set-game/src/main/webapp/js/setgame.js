@@ -285,9 +285,9 @@ function judgeIsSet(a, b, c) {
             if (sod(a.fill, b.fill, c.fill)) {
                 if (sod(a.number, b.number, c.number)) {
                     flag = true;
-                    shape_a[set[0].shape-1][set[0].color-1][set[0].fill-1][set[0].number-1];
-                    shape_a[set[1].shape-1][set[1].color-1][set[1].fill-1][set[1].number-1];
-                    shape_a[set[2].shape-1][set[2].color-1][set[2].fill-1][set[2].number-1];
+//                    shape_a[set[0].shape-1][set[0].color-1][set[0].fill-1][set[0].number-1];
+//                    shape_a[set[1].shape-1][set[1].color-1][set[1].fill-1][set[1].number-1];
+//                    shape_a[set[2].shape-1][set[2].color-1][set[2].fill-1][set[2].number-1];
                 }
             }
         }
